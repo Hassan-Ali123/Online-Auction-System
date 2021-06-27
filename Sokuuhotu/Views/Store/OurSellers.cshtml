@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Sokuuhotu.Models.ApplicationUser>
+@{
+    ViewBag.Title = "OurSellers";
+    Layout = "~/Views/Shared/_BAWLayout.cshtml";
+}
+
+
+
+<!--************************************
+                    Latest Posted Ads Start
+            *************************************-->
+<section class="tg-sectionspace tg-bglight tg-haslayout">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="tg-sectionhead">
+                   
+                    <div class="tg-description">
+                        <p>Over 10,56,432 New Ads</p>
+                    </div>
+                </div>
+            </div>
+            <div class="tg-ads tg-adsvtwo">
+
+                @foreach (var item in Model)
+                {
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <div class="tg-ad tg-verifiedad">
+                            <figure>
+                                <a href="javascript:void(0);"><img src="images/ads/img-10.jpg" alt="image description"></a>
+                            </figure>
+                            <div class="tg-adcontent">
+                                <ul class="tg-productcagegories">
+                                    <li><a href="javascript:void(0);">Furniture</a></li>
+                                </ul>
+                                <div class="tg-adtitle">
+                                    <h3><a href="javascript:void(0);">Classic car in low price</a></h3>
+                                </div>
+                                <time datetime="2017-06-06">Last Updated: 4 hours ago</time>
+                                <div class="tg-adprice"><h4>Active Products : @item.Products.Where(x => x.AuctionEnd == true).Count()</h4></div>
+                                <address>44-46 abc Road, Manchester</address>
+                                <div class="tg-phonelike">
+                                    <a class="tg-btnphone" href="javascript:void(0);">
+                                        <i class="icon-phone-handset"></i>
+                                        <span data-toggle="tooltip" data-placement="top" title="Show Phone No." data-last="0800 - 1234 - 562 - 6"><em>Show Phone No.</em></span>
+                                    </a>
+                                    <span class="tg-like"><i class="fa fa-heart"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="tg-btnbox">
+                    <a class="tg-btn" href="javascript:void(0);">View All</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--************************************
+        Latest Posted Ads End
+*************************************-->
+
+

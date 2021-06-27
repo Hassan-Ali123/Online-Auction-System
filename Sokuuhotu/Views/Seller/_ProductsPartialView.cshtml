@@ -1,0 +1,102 @@
+﻿@model IEnumerable<BAW.Models.Product>
+
+<section class="tg-sectionspace tg-haslayout" style="    margin-top: 60px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="tg-sectionhead">
+                    <div class="tg-title">
+                        <h2>Ads</h2>
+                    </div>
+                  
+                </div>
+            </div>
+            <div class="tg-ads" style="min-height:300px">
+
+                @if(Model.Count() == 0)
+                {
+                    <h3 style="text-align:center;color:#808080">No Active Ads</h3>
+                }
+
+
+                @foreach (var item in Model)
+                {
+
+                    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+
+
+                        <div class="tg-ad tg-verifiedad" style="width: 100%;">
+
+
+                            <a href="@Url.Action("ProductDetails","Store",new {Id = item.ProductId })">
+
+                                <div class="text-center" style="position: relative;overflow: hidden;height: 140px;">
+
+                                    <img class="adimage" src="@Url.Content(item.MainImageUrl)" />
+                                </div>
+                            </a>
+
+                            <div class="tg-adcontent">
+                                <div class="tg-productcagegories">
+                                    <a href="@Url.Action("ProductDetails","Store",new {Id = item.ProductId })"><h4 style="text-align: center;"> @item.ProductName</h4></a>
+                                </div>
+
+                                <!--category-->
+                                <div class="tg-adtitle">
+                                    <a href="@Url.Action("ProductsByCategory","Store",new {categoryId = item.CategoryId })"> @item.Category.CategoryName</a>
+                                </div>
+
+
+                                <address><b>@item.City</b></address>
+
+
+                                <br />
+
+                                <span>
+                                    <i class="fa fa-clock-o"></i>
+
+                                    <b class="getcountdown" style="color: #ed193e;padding-left: 7px;"></b>
+
+                                    <!--  this will not show but using in js count down function -->
+                                    <b class="enddate" style="padding-left: 7px; display:none">@item.EndDate </b>
+                                </span>
+
+
+
+
+
+
+
+                                @*<div class="tg-phonelike">
+                                <small>Details </small>
+                                <a href="@Url.Action("ProductDetails","Store",new {Id = item.ProductId })">
+                                <span class="tg-like tg-liked"><i class="fa fa-arrow-right"></i></span>
+
+                                </a>
+                            </div>*@
+
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+                }
+
+
+
+
+
+
+            </div>
+
+
+   
+        </div>
+    </div>
+</section>
+

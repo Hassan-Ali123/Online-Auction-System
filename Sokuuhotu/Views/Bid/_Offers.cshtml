@@ -1,0 +1,41 @@
+﻿@model Sokuuhotu.ViewModels.UserDashboard
+
+
+
+<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+    <div class="tg-dashboardbox tg-statistic">
+        <div class="tg-contentbox">
+            <h2 style="color:#ed193e">@Model.BuyerBidAcceptedByMe</h2>
+            <h3>Offers You Accepted</h3>
+            <a class="tg-btnviewdetail fa fa-angle-right" href="@Url.Action("BuyerBidsAccepted","Bid",new { area=""})">view</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-xs-12 col-sm-12 col-md-12" style="margin-top:4em">
+    Notifications (As a Bidder)
+</div>
+
+<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <div class="tg-dashboardbox tg-statistic">
+        <div class="tg-contentbox">
+            <h2 style="color:#ed193e">@Model.SendingBidHistory</h2>
+            <h3>Total Sent Bid</h3>
+            <a class="tg-btnviewdetail fa fa-angle-right" href="@Url.Action("BidsHistory","Bid",new { area=""})">view</a>
+        </div>
+    </div>
+</div>
+
+<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <div class="tg-dashboardbox tg-statistic">
+        <div class="tg-contentbox">
+            <h2 style="color:#46d687">@Model.BidAcceptBySeller</h2>
+            <h3>Won Bid</h3>
+            <a class="tg-btnviewdetail fa fa-angle-right" href="@Url.Action("AcceptedBidsBySeller","Bid",new { area=""})">view</a>
+        </div>
+    </div>
+</div>
+
+
+

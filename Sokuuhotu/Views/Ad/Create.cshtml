@@ -1,0 +1,251 @@
+﻿@model BAW.Models.Product
+
+@{
+    ViewBag.Title = "Its Free";
+    Layout = "~/Views/Shared/_BuyerSellerLayout.cshtml";
+}
+
+
+
+
+
+
+<main id="tg-main" class="tg-main tg-haslayout">
+    <!--************************************
+            Section Start
+    *************************************-->
+    <section class="tg-dbsectionspace tg-haslayout">
+
+
+
+
+
+
+       
+
+
+
+        <div class="row">
+           
+                @using(Html.BeginForm("Create","Ad",FormMethod.Post , new { @class = "tg-formtheme tg-formdashboard", enctype = "multipart/form-data" }))
+                { 
+                    @Html.AntiForgeryToken()
+                    <fieldset>
+                    <div class="tg-postanad">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7">
+
+                            <div class="tg-dashboardbox tg-contactdetail" style="background:#363b4d;">
+                             
+
+                                <div class="tg-dashboardholder">
+                                   
+
+                                    <div class="form-group">
+                                        <small id="chmsg" style="color:#fff"></small>
+                                        @Html.TextBoxFor(m => m.ProductName, new { name = "firstname", @class = "form-control", placeholder = "Title*", id = "name", maxlength = "20" })
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        <div class="tg-select">
+
+                                         
+                                            @Html.DropDownList("CategoryId", (IEnumerable<SelectListItem>)ViewBag.Categorylist, "Category*", new { @class = "form-control" })
+
+
+
+
+                                        </div>
+                                    </div>
+
+                                   
+                                    <div class="form-group">
+                                        <div class="tg-select">
+                                            @Html.DropDownList("closeDate", "Active Ad Till*")
+
+                                        </div>
+                                    </div>
+
+
+                                    @*<div class="form-group">
+                                        <div class="tg-select">
+                                            @Html.DropDownList("areas", "Valitse kunta*")
+
+                                        </div>
+                                    </div>*@
+
+
+                                   
+                                    <div class="form-group">
+
+                                        @Html.TextBoxFor(m => m.City, new { name = "City", @class = "form-control", placeholder = "City*" })
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        @Html.TextAreaFor(m => m.ProductDescription, new { @class = "form-control", placeholder = "Ad Description*" })
+
+                                    </div>
+                                 
+                      
+                                    @*<div class="form-group tg-inputwithicon">
+                                        <i class="fa fa-crosshairs"></i>
+                                        <input type="text" name="enteraddress" class="form-control" placeholder="Enter Address">
+                                    </div>*@
+
+                                    <div class="form-group" style="background:#fff;border-radius: 4px">
+
+                                        <div class="tg-checkbox" style="float:none;text-align:center">
+
+                                            <input id="tg-agreetermsandrules" type="checkbox" name="agreetermsandrules" />
+
+                                            <label style="color:#363b4d" for="tg-agreetermsandrules">
+                                                I agree with the
+                                                <a href="@Url.Action("Rules","Info")" target="_blank" style="color:red">
+                                                    Terms of Service
+                                                </a>
+                                            </label>
+                                        </div>
+                                     </div>
+
+
+                                    <div class="form-group" style="background:#D8C3A5;border-radius: 4px;margin-bottom: 0px;">
+
+                                        <div class="tg-checkbox" style="float:none;text-align:center;">
+                                            
+                                           <button type="submit" class="btn btn-block" id="submitBtn" style="background: #d8c3a5;color:#fff;font-family: sans-serif;font-size: 28px;line-height: 15px" disabled="disabled" >Submit </button>
+
+
+                                         </div>
+                                    </div>
+
+
+                                      @*  <input id="postBtn" class="tg-btn" type="submit" value="Post Ad" style="background:#363b4d;color:white" />*@
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5">
+                            <div class="tg-dashboardbox" id="Adimagedivs">
+                               
+                                <div class="tg-dashboardholder">
+                                   
+
+                                    @*<div class="form-group">
+                                            <input type="text" name="adtitle" class="form-control" placeholder="Enter Ad Title*">
+                                        </div>*@
+
+                                  
+                                    
+                                    <label class="tg-fileuploadlabel" for="tg-photogallery" style="padding:0;border: 2px solid #363b4d;">
+                                       <span>Front Image of Ad (max size 10 MB)</span>
+                                        <span></span>
+                           
+                                       @*<input  class="btn btn-block" id="fileupload file-input" name="mainImage" type="file"  required  />*@
+                                       
+                                        
+                                         <div class="custom-file-container" data-upload-id="myUploader">
+
+                                             <label>Remove the image <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image"><i class="fa fa-times"></i></a></label>
+
+                                            <label class="custom-file-container__custom-file">
+                                                <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+                                                <input type="file" name="mainImage" id="fileupload" class="custom-file-container__custom-file__custom-file-input" required accept="*">
+                                                <span class="custom-file-container__custom-file__custom-file-control"></span>
+                                            </label>
+                                            <div class="custom-file-container__image-preview"></div>
+
+                                         </div>
+                                     </label>
+                                   
+
+                                    
+                                    
+
+                                    <label class="tg-fileuploadlabel" for="tg-photogallery" style="min-height: 60px;padding:0;border: 2px solid #363b4d;">
+                                        <span>Additional Images (max size 10 MB)</span>
+                                        
+                                        <span></span>
+
+                                        <input class="btn btn-block multimages" id="fileupload multiimages" type="file" name="files" multiple data-jpreview-container="#preview-container" />
+                                    
+                                        <div id="preview-container" class="jpreview-container" style="padding: 34px;">
+                                        
+                                        </div>
+
+                                    </label>
+                                   
+
+                                   
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
+           }
+        </div>
+    </section>
+    <!--************************************
+            Section End
+    *************************************-->
+</main>
+
+@section scripts {
+<script src="https://cdn.jsdelivr.net/momentjs/2.13.0/moment.min.js"></script><!--Cookei plug in-->
+
+<script>
+    
+    // Code for Limiting chracters
+
+    $(document).ready(function () {
+        var max = 20;
+        
+        $('#name').keyup(function () {
+            var text_length = $('#name').val().length;
+            var text_remaining = max - text_length;
+
+            $('#chmsg').html(text_remaining + ' characters left');
+        });
+
+
+
+
+        //code for disablling or enable button
+
+        $('#tg-agreetermsandrules').click(function () {
+            if ($(this).is(":checked")) {
+                $("#submitBtn").removeAttr("disabled");
+            } else {
+                $("#submitBtn").attr("disabled", "disabled");
+            }
+        });
+
+
+    
+        //UtcOffset store to cookies
+         var offset = moment.parseZone(Date.now()).utcOffset()
+        Cookies.set('OffsetHelppohutto', offset, { expires: 365 });
+
+        
+
+
+        // code forpreview multiple images
+
+
+      
+
+        });
+
+
+ 
+   
+
+
+
+ 
+</script>
+    }
+
+

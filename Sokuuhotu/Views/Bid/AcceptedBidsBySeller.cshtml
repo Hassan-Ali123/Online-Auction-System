@@ -1,0 +1,118 @@
+﻿@model IEnumerable<BAW.Models.BidRequest>
+@{
+    ViewBag.Title = "Voittaneet huudot";
+    Layout = "~/Views/Shared/_BuyerSellerLayout.cshtml";
+}
+
+
+
+
+<!--************************************
+             Dashboard Banner Start
+     *************************************-->
+<!--************************************
+        Dashboard Banner End
+*************************************-->
+<!--************************************
+                Main Start
+        *************************************-->
+<main id="tg-main" class="tg-main tg-haslayout">
+    <!--************************************
+            Section Start
+    *************************************-->
+    <section class="tg-dbsectionspace tg-haslayout">
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="tg-dashboardbox" style="margin-top:2%">
+                    <div class="tg-dashboardboxtitle">
+                        <h2>Won Bid</h2>
+
+                    </div>
+
+
+
+
+                    <div class="tg-dashboardholder">
+
+                        <table id="tg-adstype" class="table tg-dashboardtable tg-tablemyads">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Title</th> 
+                                    <th>Price</th> 
+                                    <th>Seller </th>
+                                    <th>Seller Email</th>
+                             
+
+                                </tr>
+                            </thead>
+                            <tbody id="firstbid">
+
+
+
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr data-category="active">
+                                       
+                                            <td data-title="Kuva"><img src="@Url.Content(item.Product.MainImageUrl)" alt="Ad pic" style="height:80px;width:120px;"></td>
+
+                                        
+                               
+
+                                        <td data-title="Otsikko">
+                                            <a href="@Url.Action("ProductDetails","Store",new { id = item.ProductId })">
+
+                                                <h3>@item.Product.ProductName</h3>
+
+                                            </a>
+
+                                        </td>
+                                        <td data-title="Hinta">
+                                            @if (item.SecondPrice > item.FirstPrice)
+                                            {
+                                                <h3>@item.SecondPrice</h3>
+
+                                            }
+                                            else
+                                            {
+                                                <h3>@item.FirstPrice</h3>
+
+                                            }
+                                        </td>
+
+                                        <td data-title="Käyttäjätunnus">
+                                            <h3>@item.Product.User.Name</h3>
+                                        </td>
+                                        <td data-title="Sähköposti">
+                                            <h3>@item.Product.User.Email</h3>
+                                        </td>
+                                       
+
+
+                                    </tr>
+                                }
+
+
+                            </tbody>
+
+
+
+                        </table>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!--************************************
+            Section End
+    *************************************-->
+</main>
+<!--************************************
+        Main End
+*************************************-->

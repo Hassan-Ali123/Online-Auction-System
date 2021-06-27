@@ -1,0 +1,209 @@
+﻿<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>OLTRA - Trading</title>
+    <meta name="description" content="Online Auction Store or online Biding sale things and get money">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="~/Images/Favicon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/css/main.css">
+                 @* Combine *@
+
+    @*<link rel="stylesheet" href="~/Content/css/color.css">
+        <link rel="stylesheet" href="~/Content/css/responsive.css">*@
+                
+                @* Combine End *@
+    <link rel="stylesheet" href="~/Content/css/normalize.css">
+                  
+                 @* Combine *@
+
+   @* <link rel="stylesheet" href="~/Content/css/font-awesome.min.css">*@
+@*    <link rel="stylesheet" href="~/Content/css/transitions.css">*@
+@*    <link rel="stylesheet" href="~/Content/css/icomoon.css">*@
+@*    <link rel="stylesheet" href="~/Content/css/flags.css">*@
+@*    <link rel="stylesheet" href="~/Content/css/owl.carousel.css">*@
+@*    <link rel="stylesheet" href="~/Content/css/prettyPhoto.css">*@
+@*    <link rel="stylesheet" href="~/Content/css/jquery-ui.css">*@
+    @* <link href="~/Scripts/cookies-message.css" rel="stylesheet" />*@
+
+    <!--Plugin for Big Image  on Click Used IN Product Details-->
+   @* <link href="~/Content/jquery.fancybox.css" rel="stylesheet" />*@
+
+
+                 @* End Combine *@
+
+
+    @*<link rel="stylesheet" href="~/Content/css/scrollbar.css">
+        <link rel="stylesheet" href="~/Content/css/chartist.css">*@
+    @*<script src="~/Scripts/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>*@
+    <style>
+        .tg-formbannersearch .form-group {
+            width: 50%;
+        }
+    </style>
+</head>
+<body class="tg-home tg-homeone">
+    @*Wrapper Start*@
+
+    <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+
+        @*Header Start*@
+
+        <header id="tg-header" class="tg-header tg-haslayout">
+            <div class="tg-topbar" style="background:#363b4d">
+                <div class="container">
+                    <div class="row">
+                        @Html.Action("Search", "Store")
+                    </div>
+                </div>
+            </div>
+            <div class="tg-navigationarea">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <a class="tg-btn" style="background:#363b4d" href="@Url.Action("Create","Ad")">
+                                <i class="icon-pen"></i>
+                                <span>Post and Ad</span>
+                            </a>
+                            @if (User.Identity.IsAuthenticated == false)
+                            {
+                                <a class="tg-btn hidden-xs hidden-sm" style="background:#363b4d;margin-right: 5px;" href="@Url.Action("Login","Account")">
+                                    <i class="glyphicon glyphicon-log-in"></i>
+                                    <span>Log in</span>
+                                </a>
+
+                                <a class="tg-btn hidden-xs hidden-sm" style="background:#363b4d; margin-right: 5px;" href="@Url.Action("Register","Account")">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                    <span>Register</span>
+                                </a>
+                            }
+                            
+
+                            <nav id="tg-nav" class="tg-nav">
+                                <div class="navbar-header hlogo-header">                          
+                                    <a class="collapsed" href="@Url.Action("Index","Store")">
+                                        <img class="hidden-md hidden-lg" style="height: 46px;width: 50px;" src="~/Images/LogoH.png" alt="Logo" />
+                                    </a>
+                                </div>
+                                <div id="tg-navigation" class="collapse navbar-collapse tg-navigation" style="    padding-bottom: 3px;margin-top: -4px;">
+                                    <ul>
+                                        <li>
+                                            <a href="@Url.Action("Index","Store")">Home</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Contact","Info")">Contact</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("About","Info")">About</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        @*Header End*@
+        @RenderBody()
+        <!--************************************
+                Footer Start
+        *************************************-->
+            <footer id="tg-footer" class="tg-footer tg-haslayout" style="margin-bottom: -2px;line-height: 16px;height:100px;background:#363b4d">
+                <div class="row">
+                    <div class="col-xs-12  col-sm-12 col-md-12  col-lg-12">
+                        <div class="navbarfooter" style="margin-top: 12px;">
+                            <a href="@Url.Action("Index","Store")">Home</a>
+                            <a href="@Url.Action("Contact","Info")">Contact</a>
+                            <a href="@Url.Action("About","Info")">About</a>
+                            <a href="@Url.Action("Terms","Info")">Terms</a>
+                            <a href="@Url.Action("Rules","Info")">Rules</a>
+                            
+                        </div>
+                        <div class="img-responsive" style="width: 45px;margin: 0 auto;">
+                            <a href="https://www.facebook.com/HelppoHuuto/" target="_blank">
+                                <img src="~/Images/fbicon.png" />
+                            </a>
+                        </div>
+                        <div style="background-color:rgba(2, 2, 26, 0.74);text-align: center;">
+                            <span class="tg-copyright" style="color:#fff; padding: 0px 0;"> &copy; HelppoHuuto.fi</span>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!--************************************
+                    Footer End
+            *************************************-->
+      </div>
+    
+    <!--************************************
+            Wrapper End
+    *************************************-->
+    <script src="~/Scripts/js/vendor/jquery-library.js"></script>
+    <script src="~/Scripts/js/vendor/bootstrap.min.js"></script>
+    @*<script src="~/Scripts/js/responsivethumbnailgallery.html"></script>*@
+    <script src="~/Scripts/js/jquery.flagstrap.min.js"></script>
+    <script src="~/Scripts/js/backgroundstretch.js"></script>
+    <script src="~/Scripts/js/owl.carousel.min.js"></script>
+    <script src="~/Scripts/js/jquery.vide.min.js"></script>
+    <script src="~/Scripts/js/jquery.collapse.js"></script>
+    @*<script src="~/Scripts/js/scrollbar.min.js"></script>*@
+   @* <script src="~/Scripts/js/chartist.min.html"></script>*@
+    <script src="~/Scripts/js/prettyPhoto.js"></script>
+    <script src="~/Scripts/js/jquery-ui.js"></script>
+    <script src="~/Scripts/js/countTo.js"></script>
+    <script src="~/Scripts/js/appear.js"></script>
+    <script src="~/Scripts/js/main.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    @*<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>*@
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>*@
+   @* <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>*@
+    <script src="https://cdn.jsdelivr.net/momentjs/2.13.0/moment.min.js"></script>
+    <!--Cookei plug in-->
+    <script src="~/Scripts/cookies-message.js"></script>
+    <!--Plug in,  used in Product details For Image big on click-->
+ <script src="~/Scripts/jquery.fancybox.pack.js"></script>
+
+    
+
+
+    <script>
+    // nav fixed
+    $(document).ready(function () {
+        var stickyNavTop = $('.tg-topbar').offset().top;
+        var stickyNav = function () {
+            var scrollTop = $(window).scrollTop();
+            if (scrollTop > stickyNavTop) {$('.tg-topbar').addClass('fixed');$('.tg-navigationarea').addClass('secondnavbar');}
+            else {$('.tg-topbar').removeClass('fixed'); $('.tg-navigationarea').removeClass('secondnavbar');}};
+        stickyNav();
+        $(window).scroll(function () {
+            stickyNav();
+        });
+        //Cookei message
+        $.CookiesMessage({
+            messageText: "This site uses cookies",
+            messageBg: "#fff",								// Message box background color
+            messageColor: "#ed193e",						// Message box text color
+            messageLinkColor: "",				// Message box links color
+            closeEnable: true,									// Show the close icon
+            closeColor: "#444444",							// Close icon color
+            closeBgColor: "#000000",						// Close icon background color
+            infoText: "Learn more",							// More Info button text
+            infoUrl: "@Url.Action("Terms","Info")",									// More Info button URL
+            acceptEnable: true,                                 // Show the Accept button
+            acceptText: "Ok",				// Accept & Close  Accept button text
+            infoEnable: true,										// Show the More Info button
+             cookieExpire: 30										// Cookie expire time (days)
+        }); // End cookies
+    });
+</script>
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>
+
+

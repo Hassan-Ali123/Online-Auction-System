@@ -1,0 +1,406 @@
+﻿<!doctype html>
+<html class="no-js" lang="">
+ <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>OLTRA - Dashboard</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="~/Images/Favicon/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/css/normalize.css">
+    <link rel="stylesheet" href="~/Content/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/css/icomoon.css">
+    <link rel="stylesheet" href="~/Content/css/transitions.css">
+    <link rel="stylesheet" href="~/Content/css/flags.css">
+    <link rel="stylesheet" href="~/Content/css/owl.carousel.css">
+    <link rel="stylesheet" href="~/Content/css/prettyPhoto.css">
+    <link rel="stylesheet" href="~/Content/css/jquery-ui.css">
+    <link rel="stylesheet" href="~/Content/css/scrollbar.css">
+    <link rel="stylesheet" href="~/Content/css/chartist.css">
+    <link rel="stylesheet" href="~/Content/css/main.css">
+    <link rel="stylesheet" href="~/Content/css/dashboard.css">
+    <link rel="stylesheet" href="~/Content/css/color.css">
+    <link rel="stylesheet" href="~/Content/css/responsive.css">
+    <link rel="stylesheet" href="~/Content/css/dbresponsive.css">
+    <script src="~/Scripts/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+
+    <!--preview images -->
+    <script src="~/Scripts/ImagePreview/file-upload-with-preview.js"></script>
+    <link href="~/Scripts/ImagePreview/file-upload-with-preview.css" rel="stylesheet" />
+   
+    
+    <!--multiple images preview-->
+    <link rel="stylesheet" href="~/Scripts/jpreview.css">
+
+
+     <!--Plugin for Big Image  on Click Used IN Product Details-->
+
+    <link href="~/Content/jquery.fancybox.css" rel="stylesheet" />
+
+    <style type="text/css">
+    a.fancybox img {
+        border: none;
+        box-shadow: 0 1px 7px rgba(0,0,0,0.6);
+        -o-transform: scale(1,1); -ms-transform: scale(1,1); -moz-transform: scale(1,1); -webkit-transform: scale(1,1); transform: scale(1,1); -o-transition: all 0.2s ease-in-out; -ms-transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; transition: all 0.2s ease-in-out;
+    }
+    a.fancybox:hover img {
+        position: relative; z-index: 999; -o-transform: scale(1.03,1.03); -ms-transform: scale(1.03,1.03); -moz-transform: scale(1.03,1.03); -webkit-transform: scale(1.03,1.03); transform: scale(1.03,1.03);
+    }
+
+
+    /*multiple images preview*/
+
+    .jpreview-image {
+  width : 100px;
+  height : 100px;
+  margin: 10px;
+  position : relative;
+  float : left;
+  background-repeat : no-repeat;
+  background-position : center center;
+  -webkit-background-size : cover;
+  -moz-background-size : cover;
+  -o-background-size : cover;
+  background-size : cover;
+}
+
+.jpreview-container::after {
+  content: ".";
+  visibility: hidden;
+  display: block;
+  clear: both;
+}
+
+.jpreview-image img {
+  max-width: 100%;
+  max-height: 100%
+}
+
+</style>
+
+</head>
+<body>
+    <!--[if lt IE 8]>
+        <!--************************************
+            Wrapper Start
+    *************************************-->
+    <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+        <!--************************************
+                Header Start
+        *************************************-->
+        <header id="tg-dashboardheader" class="tg-dashboardheader tg-haslayout">
+            <nav id="tg-nav" class="tg-nav">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#tg-navigation" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
+                    <ul>
+                        <li>
+                            <a href="@Url.Action("Index", "Store", new { area = "" })">Home</a>
+                        </li>
+
+                        <li>
+                            <a href="@Url.Action("Dashboard", "Seller", new { area = "" })">Dashboard</a>
+                        </li>
+                        
+                        <li>
+                            <a href="@Url.Action("Contact","Info", new { area = "" })">Contact</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("About","Info", new { area = "" })">About</a>
+                        </li>
+
+
+                        @*@if (User.Identity.Name.Equals("tanzeelsaleem10@gmail.com"))*@
+                        @if (User.IsInRole("Admin"))
+                        {
+
+                            <li class="menu-item-has-children">
+                                <a href="javascript:void(0);">Admin</a>
+                                <ul class="sub-menu">
+                                    <li><a href="@Url.Action("MainCategories","Category",new { area="Admin" })">Add Category</a></li>
+                                    <li><a href="@Url.Action("ViewAds","DashBoard",new { area="Admin" })">All Ads</a></li>
+                                    <li><a href="@Url.Action("ViewImmoralAd","DashBoard",new { area="Admin" })">Immoral Ads</a></li>
+                                    <li><a href="@Url.Action("ContactRequest","DashBoard",new { area="Admin" })">Requests</a></li>
+                                    <li><a href="@Url.Action("AllCustomer","DashBoard",new { area="Admin" })">Users</a></li>
+                                    <li><a href="@Url.Action("Companies","DashBoard",new { area="Admin" })">Companies</a></li>
+                                </ul>
+                            </li>
+
+
+                        }
+
+
+
+
+
+                    </ul>
+                </div>
+            </nav>
+            <div class="tg-rghtbox">
+                <a class="tg-btn" href="@Url.Action("Create","Ad")">
+                    <i class="icon-pen"></i>
+                    <span>post Ad</span>
+                </a>
+
+            </div>
+
+
+
+
+
+            <div id="tg-sidebarwrapper" class="tg-sidebarwrapper">
+                <span id="tg-btnmenutoggle" class="tg-btnmenutoggle">
+                    <i class="fa fa-angle-left" style="font-size:41px;color: #ed193e;"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="67" viewBox="0 0 20 67">
+                        <metadata>
+                            <?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+                            <x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.6-c138 79.159824, 2016/09/14-01:09:01">
+                                <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                                    <rdf:Description rdf:about="" />
+                                </rdf:RDF>
+                            </x:xmpmeta>
+                            <?xpacket end="w"?>
+                        </metadata>
+                        <path id="bg" class="cls-1" d="M20,27.652V39.4C20,52.007,0,54.728,0,67.265,0,106.515.026-39.528,0-.216-0.008,12.32,20,15.042,20,27.652Z" />
+                    </svg>
+                </span>
+                <div id="tg-verticalscrollbar" class="tg-verticalscrollbar">
+                    <strong class="tg-logo"><a href="javascript:void(0);"><img src="~/Images/logo.png" alt="image description" style="height:34px;"></a></strong>
+                    <div class="tg-user">
+
+                        <div class="tg-usercontent" style="color:white">
+
+                            <b>Hi!</b>
+                             <br />
+                            <small> @User.Identity.Name</small>
+
+                        </div>
+                    </div>
+                    <nav id="tg-navdashboard" class="tg-navdashboard">
+                        <ul>
+
+
+                            @if (User.Equals("tanzeelsaleem10@gmail.com"))
+                            {
+
+
+
+
+                                <li>
+                                    <a href="@Url.Action("MainCategories","Category",new { area="Admin" })">
+                                        <i class="fa fa-plus"></i>
+                                        <span>Add Category</span>
+                                    </a>
+                                </li>
+
+
+
+                                <li>
+                                    <a href="@Url.Action("ViewAds","DashBoard",new { area="Admin" })">
+                                        <i class="icon-chart-bars"></i>
+                                        <span> All Ads</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("ViewImmoralAd","DashBoard",new { area="Admin" })">
+                                        <i class="fa fa-info-o"></i>
+                                        <span>Ad Report</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("ContactRequest","DashBoard",new { area="Admin" })">
+                                        <i class="fa fa-envelope"></i>
+                                        <span> Message</span>
+                                    </a>
+                                </li>
+
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="@Url.Action("Dashboard", "Seller",new { area=""})">
+                                        <i class="icon-chart-bars"></i>
+                                        <span> DashBoard</span>
+                                    </a>
+                                </li>
+                            
+
+
+                            <li class="menu-item-has-children">
+                                <a href="javascript:void(0);">
+                                    <i class="icon-layers"></i>
+                                    <span>As Buyer</span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a  href="@Url.Action("BidsHistory","Bid",new { area=""})">Offer Sends</a></li>
+                                    <li><a  href="@Url.Action("AcceptedBidsBySeller","Bid",new { area=""})">Bid Offer Accepted</a></li>
+                                </ul>
+                            </li>
+
+
+
+
+                            <li class="menu-item-has-children">
+                                <a href="javascript:void(0);">
+                                    <i class="icon-layers"></i>
+                                    <span>As Seller</span>
+                                </a>
+                                <ul class="sub-menu">
+
+                                    <li><a href="@Url.Action("PostedProduct","Ad",new { area=""})">View All Product's Bid</a></li>
+
+                                    <li><a href="@Url.Action("BuyerBidsAccepted","Bid",new { area=""})">Buyer's Offer Accept</a></li>
+                                </ul>
+                            </li>
+
+
+                            }
+
+
+                        </ul>
+                    </nav>
+                    <div class="tg-socialandappicons">
+                        <ul class="tg-socialicons">
+                            <li class="tg-facebook"><a href="https://www.facebook.com/HelppoHuuto/" target="_blank">  <i class="fa fa-facebook"></i></a></li>
+                         </ul>
+
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!--************************************
+                Header End
+        *************************************-->
+
+
+
+        @RenderBody()
+
+
+
+
+        <!--************************************
+                        Footer Start
+                *************************************-->
+        @*<footer id="tg-footer" class="tg-footer tg-haslayout">
+            <nav class="tg-footernav">
+                <ul>
+                    <li><a href="javascript:void(0);">Listing Policy</a></li>
+                    <li><a href="javascript:void(0);">Terms of Use</a></li>
+                    <li><a href="javascript:void(0);">Privacy Policy</a></li>
+                </ul>
+            </nav>
+            <span class="tg-copyright">&copy; HelppoHuuto.fi</span>
+        </footer>*@
+        <!--************************************
+                Footer End
+        *************************************-->
+    </div>
+    <!--************************************
+            Wrapper End
+    *************************************-->
+
+
+    @*<script src="~/Scripts/bootstrap.min.js"></script>*@
+    <script src="~/Scripts/js/vendor/jquery-library.js"></script>
+    <script src="~/Scripts/js/vendor/bootstrap.min.js"></script>
+    <script src="~/Scripts/js/tinymce/tinymce.min4bb5.js?apiKey=4cuu2crphif3fuls3yb1pe4qrun9pkq99vltezv2lv6sogci"></script>
+    <script src="~/Scripts/js/responsivethumbnailgallery.html"></script>
+    <script src="~/Scripts/js/jquery.flagstrap.min.js"></script>
+    <script src="~/Scripts/js/backgroundstretch.js"></script>
+    <script src="~/Scripts/js/owl.carousel.min.js"></script>
+    <script src="~/Scripts/js/jquery.vide.min.js"></script>
+    <script src="~/Scripts/js/jquery.collapse.js"></script>
+    <script src="~/Scripts/js/scrollbar.min.js"></script>
+    <script src="~/Scripts/js/chartist.min.html"></script>
+    <script src="~/Scripts/js/prettyPhoto.js"></script>
+    <script src="~/Scripts/js/jquery-ui.js"></script>
+    <script src="~/Scripts/js/countTo.js"></script>
+    <script src="~/Scripts/js/appear.js"></script>
+    <script src="~/Scripts/js/gmap3.js"></script>
+   @* <script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+    <script src="~/Scripts/js/main.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+    <!--Cookie Plug in-->
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
+
+    @* Plug in for fancy box images css is top on page *@
+     <script src="~/Scripts/jquery.fancybox.pack.js"></script>
+
+
+    <!--multiple images preview-->
+
+    <script src="~/Scripts/jpreview.js"></script>
+
+
+
+    @*//Jquery Data Table files*@
+
+    <link href="~/Scripts/datatables.css" rel="stylesheet" />
+
+    <script src="~/Scripts/datatables.js"></script>
+
+
+    <script>
+
+
+       $(document).ready(function () {
+           $('#Imagediv').hide();
+
+           $('#Profilebtn').click(function () {
+
+               $('#Imagediv').show(500);
+
+           });
+
+           // Pagination using Jquey DataTable plug in
+           // Customization in Css file of this Plug in
+
+           $('#tg-adstype').DataTable();
+
+
+
+           // Image preview  initilaze library
+
+           var myUpload = new FileUploadWithPreview('myUploader');
+
+           // multi images preview  initilaze library
+
+           $('.multimages').jPreview();
+
+
+
+
+       });
+
+
+
+
+     </script>
+
+
+    @RenderSection("scripts", required: false)
+
+
+
+
+
+
+
+</body>
+
+</html>
+
+
+

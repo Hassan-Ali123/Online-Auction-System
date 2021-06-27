@@ -1,0 +1,466 @@
+﻿@model BAW.ViewModels.ProductDetailsVM
+@{
+    ViewBag.Title = Model.SingleProduct.ProductName;
+    Layout = "~/Views/Shared/_BAWLayout.cshtml";
+}
+
+
+
+
+<main id="tg-main" class="tg-main tg-haslayout" style="background:#fff">
+
+    <section class="tg-sectionspace tg-haslayout" style="margin-top: 2%;">
+        <div class="container">
+
+
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                    <div style=" margin-top:-2px;background: #ed193e;height: 50px; border-radius: 5px;margin-bottom: 24px;">
+
+                        <div class="row">
+
+                           
+                            <div class="col-md-3 col-lg-3">
+
+
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <!--Text Box for putting Price -->
+
+                                @using (Html.BeginForm("BidReceived", "Bid", FormMethod.Post, new { id = "bidForm", style = "display:Block;padding:4px;" }))
+                                {
+
+
+                                    if (Model.SingleProduct.AuctionEnd == true)
+                                    {
+                                        <input disabled type="number" autocomplete="off" placeholder="put your offer" id="price" name="price" onkeyup="bid()" style="background:#fff" />
+
+                                    }
+                                    else
+                                    {
+                                        <input type="number" autocomplete="off" placeholder="put your offer" id="price" name="price" onkeyup="bid()" style="background:#fff" />
+
+                                    }
+                                    <input type="hidden" id="proId" name="proId" value="@Model.SingleProduct.ProductId" />
+                                   if (User.Identity.IsAuthenticated)
+                                    {
+                                        <input type="submit" id="bidbutton" class="btn btn-default text-uppercase" value="Send" disabled style="background:#363b4d;color:white;height: 41px;">
+
+                                    }
+                                    else
+                                    {
+                                        <div href="#" class="app-tooltip" data-title="Please Log in First" style="display:inline">
+                                            <input type="button"  class="btn btn-default text-uppercase" value="Send" style="cursor:text; background:#363b4d;color:white;height: 41px;">
+                                        </div>
+                                    }
+
+                                }
+                            </div>
+                            <!-- Text Box End -->
+                            <!-- CountDown Timer Shows-->
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+
+                                <div id="counter-styling">
+                                    <span>Time left</span> <span id="getting-started"></span>
+                                </div>
+                                </div>
+
+
+                            <div class="col-md-2 col-lg-2">
+
+
+                            </div>
+
+                            </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+
+            <div class="row">
+
+
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators" style="display:none">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                            <li data-target="#myCarousel" data-slide-to="2"></li>
+                        </ol>
+
+
+
+                        <div class="carousel-inner" style="height:330px;">
+                            <div class="item active">
+                                @*<a class="fancybox" rel="group" href="@Url.Content(Model.SingleProduct.MainImageUrl)">*@ 
+                               <img class="fancybox" src="@Url.Content(Model.SingleProduct.MainImageUrl)" alt="Main Product Image" style="width:100% ">
+                                 @*</a>*@
+</div>
+                            @foreach (var item in Model.Images)
+                            {
+
+                                <div class="item">
+                                    <img class="fancybox" src="@Url.Content(item.ImageUrl)" alt="product Images" style="width:100% " /> <!--height:350px--> 
+                                </div>
+                            }
+
+
+                        </div>
+
+
+
+
+                        <!-- Left and right controls -->
+                        <a class="left carousel-control" href="#myCarousel" data-slide="prev" style="background-image:none">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#myCarousel" data-slide="next" style="background-image:none">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                    <div tabindex="-1" class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button class="close" type="button" data-dismiss="modal">×</button>
+                                    <h3 class="modal-title">Heading</h3>
+                                </div>
+                                <div class="modal-body">
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+
+
+
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+
+
+
+
+
+                    @if (ViewData["Message"] != null)
+                    {
+                        
+
+
+
+                    <p style="color:#b71313; padding: 10px; background: #ed193e3d;">
+                      
+                        <span style="font-size: 25px;padding-right:10px; color: #ed193e" class="fa fa-times"></span>
+                        <b>Your bid was not accepted, max 2 bids per Ad.</b>
+                        <br />
+                        <span>You've already used 2 bids at this Ad.</span>
+                        
+                    </p>
+                    }
+
+
+
+                    <div id="ProductTite">
+
+                        <p>@Model.SingleProduct.ProductName</p>
+
+                    </div>
+
+
+                    <div id="descript">
+                        <h3>Description</h3>
+
+                        <p style="word-wrap: break-word;padding:1px 10px; ">
+
+                            @Model.SingleProduct.ProductDescription
+                              </p>
+                    </div>
+                    
+                   
+                </div>
+
+
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                    <div id="ItemProp" style="margin-top: 24px;background:#363b4d;color:white;border-radius: 5px;padding:3px;">
+                        <div class="row">
+
+
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-md-offset-1 col-lg-offset-1 ">
+
+
+                                <dl class="param param-feature">
+                                    <dt style="text-align: center;">Category</dt>
+                                    <dd style="margin-left: 0;text-align: center;">@Model.SingleProduct.Category.CategoryName</dd>
+                                </dl>  <!-- item-property-hor .// -->
+                            </div>
+
+                            @*<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+
+                                <dl class="param param-feature">
+                                    <dt style="text-align: center;">Maakunta</dt>
+                                    <dd style="margin-left: 0;text-align: center;">@Model.SingleProduct.SelectedArea</dd>
+                                </dl>
+                            </div>*@
+
+
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+
+                                <dl class="param param-feature">
+                                    <dt style="text-align: center;">Seller</dt>
+                                    <dd style="margin-left: 0;text-align: center;"><a href="@Url.Action("ViewProfile","Seller",new {u=Model.SingleProduct.User.Name })" style="font-weight: bold;color:#ed193e">@Model.SingleProduct.User.Name</a></dd>
+                                </dl>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+
+                                <dl class="param param-feature">
+                                    <dt style="text-align: center;">City</dt>
+                                    <dd style="margin-left: 0;text-align: center;">@Model.SingleProduct.City</dd>
+                                </dl>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+
+                                <dl class="param param-feature">
+                                    <dt style="text-align: center;">Added</dt>
+                                    <dd style="margin-left: 0;text-align: center;">@Model.SingleProduct.StartDate.ToString(string.Format("dd.MM.yyyy"))</dd>
+                                </dl>
+                            </div>
+
+                            <!-- item-property-hor .// -->
+
+
+
+
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+           
+
+            <div class="row">
+
+                    
+                @Html.Partial("_CommentsPartialView", Model)
+
+
+
+
+                </div>
+
+            <div class="row">
+
+                <div class="col-xs-6 col-sm-6 col-md-12 col-lg-12"></div>
+
+                <small style="float:right">
+                    Do you think the announcement is inappropriate?
+
+                    <button class="trigger_popup_fricc report">Report</button>
+
+                </small>
+
+               
+             </div>
+
+
+
+
+
+
+            <div class="hover_bkgr_fricc">
+                <span class="helper"></span>
+                <div>
+                    <div class="popupCloseButton">X</div>
+
+
+                   @using (Html.BeginForm("ReportAd", "Info", FormMethod.Post))
+                   {
+                    <input name="proId" type="hidden" value="@Model.SingleProduct.ProductId" />
+                    <textarea name="msg" style="margin: 0px;height: 221px;width: 232px;" placeholder="message"></textarea>
+                    <br />
+                    <input type="submit" class="tg-btn" style="background:#363b4d;margin-top: 8px;"/>
+                   }
+                </div>
+            </div>
+
+
+        </div>
+
+     
+
+
+        @*<div class="container-box rotated">
+            <button type="button" class="btn btn-info btn-lg turned-button">Click here to report this Ad</button>
+        </div>*@
+
+      
+
+    </section>
+
+</main>
+
+<!-- card.// -->
+
+
+
+
+@section scripts{
+    <script src="~/Scripts/jquery.countdown.js"></script>
+
+
+    <script type="text/javascript">
+
+// Time Counter
+        @*var date = new Date("@Model.SingleProduct.EndDate");
+
+
+        date.setMinutes(date.getMinutes() - date.getTimezoneOffset());*@
+
+        $("#getting-started")
+        .countdown("@Model.SingleProduct.EndDate", function (event) {
+            $(this).text(
+              event.strftime('%-D days %H:%M:%S')
+            );
+        });
+
+
+        $(function ($) {
+            var addToAll = false;
+            var gallery = true;
+            var titlePosition = 'inside';
+            $(addToAll ? 'img' : 'img.fancybox').each(function () {
+                var $this = $(this);
+                var title = $this.attr('title');
+                var src = $this.attr('data-big') || $this.attr('src');
+                var a = $('<a href="#" class="fancybox"></a>').attr('href', src).attr('title', title);
+                $this.wrap(a);
+            });
+            if (gallery)
+                $('a.fancybox').attr('rel', 'fancyboxgallery');
+            $('a.fancybox').fancybox({
+                titlePosition: titlePosition
+            });
+        });
+        $.noConflict();
+
+
+        // pop up box
+
+
+
+        $(window).load(function () {
+            $(".trigger_popup_fricc").click(function () {
+                $('.hover_bkgr_fricc').show();
+            });
+
+            $('.popupCloseButton').click(function () {
+                $('.hover_bkgr_fricc').hide();
+            });
+        });
+
+
+
+        //// Bid button Disable If text box Empty
+
+        function bid() {
+            if (document.getElementById("price").value === "") {
+                document.getElementById('bidbutton').disabled = true;
+            } else {
+                document.getElementById('bidbutton').disabled = false;
+            }
+        }
+
+
+</script>
+
+    <style>
+
+ .app-tooltip {
+      position: relative;
+    }
+
+    .app-tooltip:before {
+      content: attr(data-title);
+      background-color: rgba(97, 97, 97, 0.9);
+      color: #fff;
+      font-size: 12px;
+          width: 83px;
+
+      padding: 10px;
+      position: absolute;
+      bottom: -50px;
+      opacity: 0;
+      transition: all 0.4s ease;
+      font-weight: 500;
+      z-index: 2;
+    }
+
+    .app-tooltip:after {
+      content: '';
+      position: absolute;
+      opacity: 0;
+      left: 5px;
+      bottom: -16px;
+      border-style: solid;
+      border-width: 0 10px 10px 10px;
+      border-color: transparent transparent rgba(97, 97, 97, 0.9) transparent;
+      transition: all 0.4s ease;
+    }
+
+    .app-tooltip:hover:after,
+    .app-tooltip:hover:before {
+      opacity: 1;
+    }
+
+    </style>
+
+       
+
+
+}
+
+
+
+
+

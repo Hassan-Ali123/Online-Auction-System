@@ -1,0 +1,66 @@
+﻿
+@model IEnumerable<BAW.Models.BidRequest>
+
+
+
+
+<table id="tg-adstype" class="table tg-dashboardtable tg-tablemyads">
+    <thead>
+        <tr>
+
+            
+
+            <th>Image</th>
+            <th>Title</th>
+            <th style="text-transform:none">First Bid</th>
+            <th style="text-transform:none">Second Bid</th>
+            <th>Bid Date</th>
+            <th>Note</th>
+
+
+
+
+
+        </tr>
+    </thead>
+    <tbody>
+
+
+
+        @foreach (var item in Model)
+        {
+
+            <tr data-category="active">
+
+                <td data-title="image"><img src="@Url.Content(item.Product.MainImageUrl)" alt="Ad pic" style="height:80px;width:120px;"></td>
+                <td data-title="item name">
+                    <a href="@Url.Action("ProductDetails","Store",new { id = item.ProductId })">
+                        <h3>@item.Product.ProductName</h3>
+                        </a>
+</td>
+                <td style="text-transform:none" data-title="first bid">
+                    <h3>@item.FirstPrice</h3>
+                </td>
+                <td style="text-transform:none" data-title="second bid"><h3>@item.SecondPrice</h3> </td>
+                <td data-title="date"><span class="tg-adstatus tg-adstatusactive">@item.BidDate.ToString(string.Format("d.MM.yy"))</span></td>
+
+                @if (item.Note == null)
+                {
+                    <td data-title="note"><span data-toggle="modal" data-target="#myModal" class="tg-adstatus tg-adstatusactive" style="cursor:pointer" onclick="getId(@item.BidRequestId)"><i class="fa fa-sticky-note-o"></i></span></td>
+
+                }
+                else
+                {
+                    <td data-title="note">@item.Note</td>
+
+                }
+
+
+            </tr>
+        }
+
+    </tbody>
+
+
+
+</table>

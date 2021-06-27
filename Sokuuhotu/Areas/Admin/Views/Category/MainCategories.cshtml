@@ -1,0 +1,78 @@
+﻿@model BAW.ViewModels.CategoriesVM
+@{
+    ViewBag.Title = "MainCategories";
+    Layout = "~/Views/Shared/_BuyerSellerLayout.cshtml";
+}
+
+
+
+
+
+<!--************************************
+             Dashboard Banner Start
+     *************************************-->
+<div class="tg-dashboardbanner">
+    <h1>Add and View Categories</h1>
+
+</div>
+<!--************************************
+        Dashboard Banner End
+*************************************-->
+<!--************************************
+                Main Start
+        *************************************-->
+<main id="tg-main" class="tg-main tg-haslayout">
+    <!--************************************
+            Section Start
+    *************************************-->
+    <section class="tg-dbsectionspace tg-haslayout">
+
+        <div class="row">
+
+            <div class="col-md-6 col-lg-6">
+
+            </div>
+            @using (Html.BeginForm("MainCategories", "Category", FormMethod.Post, new { role = "form" }))
+            {
+
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    @Html.TextBoxFor(m => m.CreateCategory.CategoryName, new { @class = "form-control", placeholder = "Category Name" })
+
+                </div>
+                <div class="col-md-11 col-lg-11">
+
+                </div>
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="margin:5px 0 5px 0">
+
+                        <input type="submit" value="Create" class="btn btn-primary" style="background-color:#363b4d" />
+
+                    </div>
+                    }
+
+
+                    </div>
+
+
+
+        <div class="row">
+            @Html.Partial("_AllCategoriesPartialView", Model)
+
+        </div>
+    </section>
+    <!--************************************
+            Section End
+    *************************************-->
+</main>
+<!--************************************
+        Main End
+*************************************-->
+
+@section scripts{
+    <script>
+        function RemoveRow() {
+            var $tr = $(this).closest('tr');
+            $tr.remove();
+        }
+    </script>
+
+}

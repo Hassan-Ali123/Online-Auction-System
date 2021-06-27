@@ -1,0 +1,243 @@
+﻿@model Sokuuhotu.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    Layout = null;
+}
+
+
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Register</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="~/Images/Favicon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/css/normalize.css">
+    <link rel="stylesheet" href="~/Content/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/css/icomoon.css">
+    <link rel="stylesheet" href="~/Content/css/transitions.css">
+    <link rel="stylesheet" href="~/Content/css/flags.css">
+    <link rel="stylesheet" href="~/Content/css/owl.carousel.css">
+    <link rel="stylesheet" href="~/Content/css/prettyPhoto.css">
+    <link rel="stylesheet" href="~/Content/css/jquery-ui.css">
+    <link rel="stylesheet" href="~/Content/css/scrollbar.css">
+    <link rel="stylesheet" href="~/Content/css/chartist.css">
+    <link rel="stylesheet" href="~/Content/css/main.css">
+    <link rel="stylesheet" href="~/Content/css/color.css">
+    <link rel="stylesheet" href="~/Content/css/responsive.css">
+    <script src="~/Scripts/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+
+
+    <style>
+        #textdiv {
+            float: left;
+            margin: 0 0 40px;
+            background: #fcfcfc;
+            border: 1px solid #eaedef;
+            height: 405px;
+        }
+
+        #logoimg {
+            margin-bottom: -60px;
+            height: 100px;
+            max-width: 100%;
+        }
+    </style>
+
+
+
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+<body style="background:#EAE7DC">
+    <div class="container">
+       
+        <div id="tg-wrapper" class="tg-wrapper tg-haslayout" style="background:none">
+
+            <main id="tg-main" class="tg-main tg-haslayout" style="background:none">
+                <div class="container">
+                    <div class="row">
+
+                        
+
+                        <div id="tg-content" class="tg-content">
+                            <div class="tg-loginsignup" style="float:none">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">
+                                    <div class="tg-logingarea" style="background:#363b4d">
+                                       
+                                      
+
+                                        @using (Html.BeginForm("Register", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "tg-formtheme tg-formloging", role = "form" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+
+                                            <fieldset>
+
+                                                @if (ViewBag.Mesage != null)
+                                                {
+                                                    <p style="font-family:sans-serif;font-size:15px;color:#fff">@ViewBag.Mesage</p>
+                                                }
+
+
+                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                <div class="form-group" data-toggle="tooltip" data-placement="top" title="User Name should be unique">
+                                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", name = "UserName", id="uName", placeholder = "User Name", onfocusout = "checkUserName()" })
+                                                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                                                    <span id="msg" ></span>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", name = "UserName", placeholder = "First Name" })
+                                                    @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", name = "UserName", placeholder = "Last Name" })
+                                                    @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="check" style="float:left">
+
+                                                        @Html.CheckBoxFor(m => m.AsUser, new { style= "-webkit-transform: scale(2); margin-left:8px", name = "AsUser" })
+                                                        <span style="color:#fff;margin-left:5px">Individual</span>
+                                                    </div>
+
+                                                    <div class="check" style="float:right;margin-right: 2px;">
+                                                        @Html.CheckBoxFor(m => m.AsCompany, new {style = "-webkit-transform: scale(2);", name = "AsCompany" })
+                                                        <span style="color:#fff;margin-left: 5px;">Company</span>
+
+                                                    </div>
+                                                    @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+
+                                                </div>
+
+
+
+                                                <div class="form-group">
+                                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", name = "Email", placeholder = "Email" })
+                                                    @Html.ValidationMessageFor(m => m.Email,"", new { @class = "text-danger" })
+                                                 </div>
+                                                <div class="form-group">
+                                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", name = "Password", placeholder = "Password" })
+                                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+                                                    
+                                                </div>
+
+                                                <div class="form-group">
+                                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", name = "Password", placeholder = "Confirm Password" })
+                                                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+
+
+                                                </div>
+
+                                                @*<button class="tg-btn" type="button">Login</button>*@
+                                              @*  <input type="submit" value="Create" class="btn btn-default" style="color:white;background:#363b4d" />*@
+                                                <div class="form-group" style="background:#D8C3A5;border-radius: 4px;height: 30px;">
+
+                                                    <div class="tg-checkbox" style="float:none;text-align:center;">
+
+                                                        <button class="btn btn-block" type="submit" style="background: #d8c3a5; height:50px;color:#fff;font-family: sans-serif;font-size: 28px;">Register </button>
+
+
+                                                    </div>
+                                                </div>
+                                              
+
+                                            </fieldset>
+                                        }
+
+
+                                    </div>
+
+
+
+                                </div>
+                             
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <!--************************************
+                    Main End
+            *************************************-->
+           
+        </div>
+
+
+    </div>
+
+    <script src="~/Scripts/js/vendor/jquery-library.js"></script>
+    <script src="~/Scripts/js/vendor/bootstrap.min.js"></script>
+    <script src="~/Scripts/js/responsivethumbnailgallery.html"></script>
+    <script src="~/Scripts/js/jquery.flagstrap.min.js"></script>
+    <script src="~/Scripts/js/backgroundstretch.js"></script>
+    <script src="~/Scripts/js/owl.carousel.min.js"></script>
+    <script src="~/Scripts/js/jquery.vide.min.js"></script>
+    <script src="~/Scripts/js/jquery.collapse.js"></script>
+    <script src="~/Scripts/js/scrollbar.min.js"></script>
+    <script src="~/Scripts/js/chartist.min.html"></script>
+    <script src="~/Scripts/js/prettyPhoto.js"></script>
+    <script src="~/Scripts/js/jquery-ui.js"></script>
+    <script src="~/Scripts/js/countTo.js"></script>
+    <script src="~/Scripts/js/appear.js"></script>
+    <script src="~/Scripts/js/main.js"></script>
+        <script>
+          function checkUserName() {
+             var name = $('#uName').val().trim();
+             $.ajax({
+
+                 type: 'POST',
+                 url: '@Url.Action("NameExist", "Account")',
+                 data: '{ Name:"' + name + '" }',
+                 contentType: "Application/json",
+                 datatype: "json",
+                 success: function (result) {
+                     var msg = $('#msg')
+
+                     if (result) { // When result will return fail
+
+                         msg.html('user name is available');
+                         msg.css("color", "green");
+                        
+                     }
+
+                     else {
+                         msg.html('user name is already taken');
+                         msg.css("color", "Red");
+                     }
+                 }
+
+             });
+
+
+
+          }
+
+
+
+            $('.check input:checkbox').click(function () {
+                $('.check input:checkbox').not(this).prop('checked', false);
+            });
+
+     </script>
+
+</body>
+</html>

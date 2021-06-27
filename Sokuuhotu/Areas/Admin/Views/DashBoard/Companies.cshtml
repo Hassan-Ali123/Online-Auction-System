@@ -1,0 +1,132 @@
+﻿@model IEnumerable<Sokuuhotu.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "Companies";
+    Layout = "~/Views/Shared/_BuyerSellerLayout.cshtml";
+}
+
+
+
+<!--************************************
+             Dashboard Banner Start
+     *************************************-->
+<div class="tg-dashboardbanner">
+    <h1>All Companies</h1>
+
+</div>
+<!--************************************
+        Dashboard Banner End
+*************************************-->
+<!--************************************
+                Main Start
+        *************************************-->
+<main id="tg-main" class="tg-main tg-haslayout">
+    <!--************************************
+            Section Start
+    *************************************-->
+    <section class="tg-dbsectionspace tg-haslayout">
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="tg-dashboardbox">
+                    <div class="tg-dashboardboxtitle">
+                        <h2>Companies <span style="color:#ed193e">Count: @Model.Count()</span></h2>
+
+                    </div>
+                    <div class="tg-dashboardholder">
+
+                        <table id="tg-adstype" class="table tg-dashboardtable tg-tablemyads">
+                            <thead>
+                                <tr>
+
+                                    <th>Photo</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Contact</th>
+                                    <th>User Name</th>
+                                    <th>Member Since</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr data-category="active">
+
+                                        @if (item.ProfileImageUrl != null)
+                                        {
+                                            <td data-title="Photo"><img src="@Url.Content(item.ProfileImageUrl)" alt="image description" style="height:80px;width:120px;"></td>
+
+                                        }
+                                        else
+                                        {
+                                            <td data-title="Photo"><img src="~/Images/profileicon.jpg" alt="image description" style="height:80px;width:120px;"></td>
+
+                                        }
+                                        <td data-title="Name">
+                                            <h3>@item.FirstName</h3>
+
+                                        </td>
+
+                                        <td data-title="Email">
+                                            <h3>@item.Email</h3>
+
+                                        </td>
+
+                                        <td data-title="Contact">
+                                            <h3>@item.Mobile</h3>
+
+                                        </td>
+
+                                        <td data-title="UserName">
+                                            <a  href="@Url.Action("Profile", "Seller", new { u = item.Name,area="" })">
+                                                <h3 style="color:rgb(237, 25, 62); text-align:center">@item.Name</h3>
+                                            </a>
+                                        </td>
+
+                                        <td data-title="Date">
+                                            <h3>@item.AccountCreatedDate.ToShortDateString()</h3>
+                                        </td>
+
+
+
+
+
+
+
+
+                                    </tr>
+                                }
+
+
+
+
+
+
+
+
+                            </tbody>
+
+
+
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!--************************************
+            Section End
+    *************************************-->
+</main>
+<!--************************************
+        Main End
+*************************************-->

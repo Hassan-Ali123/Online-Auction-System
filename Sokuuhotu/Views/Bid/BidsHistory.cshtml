@@ -1,0 +1,159 @@
+﻿
+@model IEnumerable<BAW.Models.BidRequest>
+@{
+    ViewBag.Title = "Huudot ";
+    Layout = "~/Views/Shared/_BuyerSellerLayout.cshtml";
+
+}
+
+
+
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            
+
+                @using (Html.BeginForm("AddNote", "Bid", FormMethod.Post))
+                {
+                    <div class="modal-body">
+
+                        <input id="bId" type="hidden" name="id" />
+                        <textarea name="note" style="margin: 0px;width: 266px;height: 137px;"></textarea>
+                    </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <input type="submit" class="btn btn-primary"  value="Add">
+            </div>
+                }
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<!--Show Note Message-->
+
+
+@*<div class="modal fade" id="Msg" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+
+
+           
+                <div class="modal-body">
+
+                    <div  style="margin: 0px;width: 266px;height: 157px; overflow:auto">
+                        <p id="Viewmsg">
+
+                        </p>
+                    </div>
+                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+            
+
+        </div>
+    </div>
+</div>*@
+
+
+
+
+
+
+
+
+
+
+    <!--************************************
+                 Dashboard Banner Start
+         *************************************-->
+  
+    <!--************************************
+            Dashboard Banner End
+    *************************************-->
+    <!--************************************
+                    Main Start
+            *************************************-->
+    <main id="tg-main" class="tg-main tg-haslayout">
+        <!--************************************
+                Section Start
+        *************************************-->
+        <section class="tg-dbsectionspace tg-haslayout">
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="tg-dashboardbox" style="margin-top: 2%;">
+                        <div class="tg-dashboardboxtitle">
+                            <h2>Offers Sent</h2>
+
+                        </div>
+
+
+
+
+                        <div class="tg-dashboardholder">
+
+                            <div id="grid-list">
+                                @{ Html.RenderPartial("_BidHistoryPartial",  Model); }
+                            </div>
+
+
+                          
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!--************************************
+                Section End
+        *************************************-->
+    </main>
+    <!--************************************
+            Main End
+    *************************************-->
+
+    @section scripts{
+
+
+@*<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css" />*@
+
+
+    <script>
+
+
+        function ShowMsg() {
+            var msg = $('#textmsg').val();
+           alert('"+msg+"');
+
+        }
+
+
+        function getId(id) {
+            $('#bId').attr("value",id);
+
+        }
+
+
+
+
+</script>
+
+
+
+
+ 
+
+    }
+
+

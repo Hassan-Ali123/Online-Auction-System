@@ -1,0 +1,123 @@
+﻿@model Sokuuhotu.Models.ApplicationUser
+
+
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "~/Views/Shared/_BAWLayout.cshtml";
+}
+
+
+
+
+<div class="col-lg-3 col-sm-3">
+    </div>
+
+    <div class="col-lg-6 col-sm-6">
+        <div class="card hovercard" style="margin-top: 5%;">
+
+            @if (Model.ProfileImageUrl !=null)
+            {
+                <div class="card-background">
+                    <img class="card-bkimg" alt="" src="@Url.Content(Model.ProfileImageUrl)">
+                </div>
+                <div class="useravatar">
+                    <img class="fancybox" alt="" src="@Url.Content(Model.ProfileImageUrl)">
+                </div>
+            }
+            else
+            {
+                <div class="card-background">
+                    <img class="card-bkimg" alt="" src="~/Images/LogoH.png">
+                </div>
+                <div class="useravatar">
+                    <img class="fancybox" alt="" src="~/Images/profileicon.jpg">
+                </div>
+            }
+
+          
+        </div>
+        <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+            <div class="btn-group" role="group">
+                <button type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab">
+                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                    <div class="hidden-xs">Profiili</div>
+                </button>
+            </div>
+            
+            <div class="btn-group" role="group">
+                <button type="button" id="following" class="btn btn-default backcolors" href="#tab3" data-toggle="tab">
+                    <span class="fa fa-gavel" aria-hidden="true"></span>
+                    <div class="hidden-xs">Ads </div>
+                </button>
+            </div>
+        </div>
+        <div class="well" style="min-height: 397px;">
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="tab1" style="text-align: center;">
+                    <h3>@Model.Name</h3>
+                    <h6 style="word-wrap: break-word;">@Model.AboutMe </h6>
+                    <small style="margin-top:20px"><a href="https://www.@Html.Raw(Model.YourWebAddress)">@Model.YourWebAddress</a> </small>
+                    
+                </div>
+
+
+
+           
+                <div class="tab-pane fade in" id="tab3" style="text-align:center;padding-top: 130px;" >
+                    <h5 style="color:#000000">AActive Ads:<span style="padding-left:5px;color:#000000">@Model.Products.Where(p => p.AuctionEnd == false).Count()</span></h5>
+                   
+                    
+                    <a href="@Url.Action("SellerItems","Seller",new { userName = Model.Name })">
+                         <button style="background: #ed193e;" class="btn btn-block btn-primary" >View Ads</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+<div class="col-lg-3 col-sm-3">
+</div>
+
+
+    @section scripts{
+
+    
+
+        <script>
+
+            $(document).ready(function () {
+                $(".btn-pref .btn").click(function () {
+                    $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
+                    // $(".tab").addClass("active"); // instead of this do the below 
+                    $(this).removeClass("btn-default").addClass("btn-primary");
+                });
+            });
+
+
+
+            $(function ($) {
+                var addToAll = false;
+                var gallery = true;
+                var titlePosition = 'inside';
+                $(addToAll ? 'img' : 'img.fancybox').each(function () {
+                    var $this = $(this);
+                    var title = $this.attr('title');
+                    var src = $this.attr('data-big') || $this.attr('src');
+                    var a = $('<a href="#" class="fancybox"></a>').attr('href', src).attr('title', title);
+                    $this.wrap(a);
+                });
+                if (gallery)
+                    $('a.fancybox').attr('rel', 'fancyboxgallery');
+                $('a.fancybox').fancybox({
+                    titlePosition: titlePosition
+                });
+            });
+            $.noConflict();
+
+
+
+        </script>
+
+    }
+

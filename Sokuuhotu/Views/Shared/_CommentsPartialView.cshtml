@@ -1,0 +1,105 @@
+﻿@model BAW.ViewModels.ProductDetailsVM
+
+
+
+
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+
+    <div class="tg-replaybox" style="margin-top:9px">
+        <h2>Ask the seller</h2>
+        @using (Html.BeginForm("AddComment", "Store", FormMethod.Post, new { @class = "tg-formtheme tg-formreply" }))
+        {
+            @Html.AntiForgeryToken()
+            @*@Html.HiddenFor(m=>m.Comment.ProductId, Model.SingleProduct.ProductId )*@
+            <input type="hidden" value="@Model.SingleProduct.ProductId" name="proId" , id="proId" />
+
+            <fieldset>
+                <div class="row">
+
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group tg-inputwithicon" style="margin-top:-6px">
+                            <i class="icon-bubble"></i>
+                            @Html.TextAreaFor(m => m.Comment.Message, new { @class = "form-control", style = "height: 90px;" })
+
+
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <button class="tg-btn" type="submit" style="margin-top: -10px;">Send</button>
+                    </div>
+                </div>
+            </fieldset>
+        }
+
+
+    </div>
+
+</div>
+
+
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+
+    <div id="tg-comments" class="tg-comments" style="margin-top: -13px;">
+        <h2>Comments</h2>
+
+
+
+        <ul style="height:350px;overflow: auto;">
+
+
+            @foreach (var item in Model.Comments)
+            {
+                <li>
+                    <div class="tg-author">
+
+                        <div class="tg-authorcontent" style="background:#eae7dc;padding:6px">
+                            <div class="tg-authorhead">
+                                <div class="tg-boxleft">
+
+                                    @* Check For Normal User and Produt owner *@
+
+                                    @if (item.Product.UserId == item.UserId)
+                                    {
+                                        <h3><i class="fa fa-user" style="margin-right: 5px;"></i>Myyjä </h3>
+
+                                    }
+                                    else if (item.User != null)
+                                    {
+                                        <h3><i class="fa fa-user" style="margin-right: 5px;"></i>@item.User.Name </h3>
+
+                                    }
+
+
+                                    <small style="font-size:66%;">@item.Date.ToString("dd.mm.yyyy HH:mm:ss");</small>
+                                </div>
+
+                            </div>
+                            <div class="tg-description" style="padding: 15px 0 0;">
+                                <p style="margin-left:10px;font-size: 13px;line-height: 20px;">@item.Message</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </li>
+            }
+
+
+
+
+        </ul>
+
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+

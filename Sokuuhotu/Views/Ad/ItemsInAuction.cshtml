@@ -1,0 +1,120 @@
+﻿@model IEnumerable<BAW.Models.Product>
+@{
+    ViewBag.Title = "Ilmoitukset";
+    Layout = "~/Views/Shared/_BuyerSellerLayout.cshtml";
+}
+
+<!--************************************
+             Dashboard Banner Start
+     *************************************-->
+
+<!--************************************
+        Dashboard Banner End
+*************************************-->
+<!--************************************
+                Main Start
+        *************************************-->
+<main id="tg-main" class="tg-main tg-haslayout">
+    <!--************************************
+            Section Start
+    *************************************-->
+    <section class="tg-dbsectionspace tg-haslayout">
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="tg-dashboardbox" style="margin-top: 2%;">
+                    <div class="tg-dashboardboxtitle">
+                        <h2>Active Ads</h2>
+
+                    </div>
+                    <div class="tg-dashboardholder">
+
+                        <table id="tg-adstype" class="table tg-dashboardtable tg-tablemyads">
+                            <thead>
+                                <tr>
+
+
+
+                                    <th>Image</th>
+                                    <th>Title</th>
+                                    <th>Started Date</th>
+                                    <th>Closing Date</th>
+                                    <th>Status</th>
+                                    <th>Offers</th>
+
+
+
+
+                                    <th style="text-transform:none">See Offers </th>
+
+
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr data-category="active">
+
+                                        <td data-title="Kuva"><img src="@Url.Content(item.MainImageUrl)" alt="image description" style="height:80px;width:120px;"></td>
+                                        <td data-title="Otsikko">
+                                            <a href="@Url.Action("ProductDetails","Store",new {id= item.ProductId })"> <h3 style="text-align:center">@item.ProductName</h3></a>
+
+                                        </td>
+                                        <td data-title="IImoituspäivä"><span class="tg-adstatus tg-adstatusactive">@item.StartDate.ToString(string.Format("d.MM.yy"))</span></td>
+                                        <td data-title="Päättymispäivä"><span class="tg-adstatus tg-adstatusactive">@item.EndDate.ToString(string.Format("d.MM.yy"))</span></td>
+
+           
+                                          <td data-title="Status"><span class="tg-adstatus tg-adstatusactive">@(item.AuctionEnd ? "non-active" : "active")</span></td>
+
+                                        @*@item.Bids.Count()*@
+                                        
+                                        <td data-title="Tarjoukset"><span class="tg-adstatus tg-adstatusactive"> @Html.Raw(string.Format("{0}", (item.Bids.Where(m => m.FirstPrice != 0).Count() + item.Bids.Where(m => m.SecondPrice != 0).Count())))  </span></td>
+                                        
+
+                                      @*  <td data-title="Bids"><span class="tg-adstatus tg-adstatusactive">@item.Bids.Count()</span></td>*@
+
+
+                                        <td data-title="Katso tarjoukset">
+                                            <div class="tg-btnsactions">
+                                                <a class="tg-btnaction tg-btnactionview" href="@Url.Action("AllBidsByProduct","Bid", new { proId = item.ProductId })"><i class="fa fa-eye"></i><small></small> </a>
+                                            </div>
+                                        </td>
+
+
+
+                                    </tr>
+                                }
+
+
+
+
+
+
+
+
+                            </tbody>
+
+
+
+
+                        </table>
+                    
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!--************************************
+            Section End
+    *************************************-->
+</main>
+<!--************************************
+        Main End
+*************************************-->

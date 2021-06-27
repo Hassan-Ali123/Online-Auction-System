@@ -1,0 +1,107 @@
+﻿@model IEnumerable<BAW.Models.Contact>
+
+@{
+    ViewBag.Title = "ContactRequest";
+    Layout = "~/Views/Shared/_BuyerSellerLayout.cshtml";
+}
+
+
+
+<!--************************************
+             Dashboard Banner Start
+     *************************************-->
+<div class="tg-dashboardbanner">
+    <h1>Messages</h1>
+
+</div>
+<!--************************************
+        Dashboard Banner End
+*************************************-->
+<!--************************************
+                Main Start
+        *************************************-->
+<main id="tg-main" class="tg-main tg-haslayout">
+    <!--************************************
+            Section Start
+    *************************************-->
+    <section class="tg-dbsectionspace tg-haslayout">
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="tg-dashboardbox">
+                    <div class="tg-dashboardboxtitle">
+                        <h2>Messages</h2>
+
+                    </div>
+                    <div class="tg-dashboardholder">
+
+                        <table id="tg-adstype" class="table tg-dashboardtable tg-tablemyads">
+                            <thead>
+                                <tr>
+
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Message</th>
+                                    <th>Date</th>
+
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr data-category="active">
+
+                                        <td data-title="Name">
+                                            @item.Name
+                                        </td>
+
+                                        <td data-title="Email">
+                                            @item.Email
+                                        </td>
+                                        <td data-title="Message">
+                                            <p>@item.Message</p>
+                                        </td>
+                                        <td data-title="Dae">
+                                            <small>@item.PostedDate</small>
+                                        </td>
+
+
+
+                                    </tr>
+                                }
+
+
+
+
+
+
+
+
+                            </tbody>
+
+
+
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!--************************************
+            Section End
+    *************************************-->
+</main>
+<!--************************************
+        Main End
+*************************************-->
+
+

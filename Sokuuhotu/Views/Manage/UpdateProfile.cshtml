@@ -1,0 +1,74 @@
+﻿@model Sokuuhotu.Models.UpdateProfile
+@{
+    ViewBag.Title = "Update Profile";
+    Layout = "~/Views/Shared/_BuyerSellerLayout.cshtml";
+}
+
+<main id="tg-main" class="tg-main tg-haslayout">
+    <!--************************************
+            Section Start
+    *************************************-->
+    <section class="tg-dbsectionspace tg-haslayout">
+        <div class="row">
+            @using (Html.BeginForm("UpdateProfile", "Manage", FormMethod.Post, new { @class = "tg-formtheme tg-formdashboard", enctype = "multipart/form-data" }))
+            { 
+                      <fieldset>
+                    <!--************************************
+                            Activity Start
+                    *************************************-->
+                    <div class="col-xs-12 col-sm-4 col-md-6 col-lg-6 tg-lgcolwidthhalf">
+                        <div class="tg-dashboardbox">
+                            <div class="tg-dashboardboxtitle">
+                                <h2>Profile Photo</h2>
+                            </div>
+                            <div class="tg-dashboardholder">
+                                <label class="tg-fileuploadlabel" for="tg-photogallery">
+                                    <span>Upload Your Image </span>
+                                    <span></span>
+
+                                   @*@Html.TextBoxFor(m => m.Image, new {@class="btn btn-block", type = "file" })*@
+                                    <input class="btn btn-block" type="file" name="Image" />
+
+                                </label>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <!--************************************
+                            Activity End
+                    *************************************-->
+                      <!--************************************
+                            Approved Ads Start
+                    *************************************-->
+                    <div class="col-xs-12 col-sm-4 col-md-6 col-lg-6 tg-lgcolwidthhalf">
+                        <div class="tg-dashboardbox" style="height: 280px;">
+                            <div class="tg-dashboardboxtitle">
+                                <h2>Add Mobile Number</h2>
+                            </div>
+                            <div class="tg-dashboardholder">
+                                <div class="form-group">
+                                   @* <input type="password" name="currentpassword" class="form-control" placeholder="Current Password">*@
+                                    @Html.TextBoxFor(m=> m.Number,new  {@class="form-control", placeholder="Your Mobile Number" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                          <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 tg-lgcolwidthhalf">
+                          </div>
+                          <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 tg-lgcolwidthhalf">
+                              <button style="position: relative;left: 27%;margin-top: 5px;" class="tg-btn" type="submit">Change Now</button>
+
+                           </div>
+                          <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 tg-lgcolwidthhalf">
+                          </div>
+                              <!--************************************
+                Approved Ads End
+        *************************************-->
+</fieldset>
+            }
+        </div>
+    </section>
+    <!--************************************
+            Section End
+    *************************************-->
+</main>

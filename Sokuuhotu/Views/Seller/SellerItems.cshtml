@@ -1,0 +1,56 @@
+﻿@model IEnumerable<BAW.Models.Product>
+@{
+    ViewBag.Title = "Seller Ads";
+    Layout = "~/Views/Shared/_BAWLayout.cshtml";
+}
+
+
+@Html.Partial("_ProductsPartialView",Model)
+
+
+
+@section scripts{
+
+    <script src="~/Scripts/jquery.countdown.js"></script>
+
+
+    <script>
+
+
+     $(document).ready(function () {
+
+
+        // Counter in each Ad
+
+
+         $('.tg-ad').each(function () {
+             var thisdiv = $(this);
+
+
+             //var date = new Date(thisdiv.find('.enddate').html());
+
+
+             //date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+             thisdiv.find('.getcountdown').countdown(thisdiv.find('.enddate').html(), function (event) {
+
+
+                 $(this).text(
+                    event.strftime('%-D vrk%!D %H:%M:%S')
+                  );
+             }
+
+
+
+         )
+
+
+
+         });
+
+
+
+
+     });
+</script>
+
+    }

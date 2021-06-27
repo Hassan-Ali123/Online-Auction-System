@@ -1,0 +1,74 @@
+﻿@model BAW.Models.Contact
+@{
+    ViewBag.Title = "Asiakaspalvelu ";
+    Layout = "~/Views/Shared/_BAWLayout.cshtml";
+}
+
+
+
+
+<!--************************************
+                Main Start
+        *************************************-->
+<main id="tg-main" class="tg-main tg-haslayout" style="background:#fff">
+    <!--************************************
+            Contact Us Start
+    *************************************-->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div id="tg-content" class="tg-content">
+                  
+          
+                    <div class="tg-contactarea">
+                      
+                        <div class="row">
+                           
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3 ">
+                                <div class="row">
+
+                        @using (Html.BeginForm("Contact", "Info", FormMethod.Post))
+                        {
+
+
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                           
+                                            @Html.TextBoxFor(m=> m.Name,new { name = "firstname" ,@class="form-control", placeholder="Name*" })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="form-group">
+
+                                            @Html.TextBoxFor(m => m.Email, new { name = "Email", @class = "form-control", placeholder = "Email*" })
+                                        </div>
+                                    </div>
+                                  
+                                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <div class="form-group">
+
+                                            @Html.TextAreaFor(m=>m.Message, new { @class = "form-control", placeholder = "Message" })
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <button class="tg-btn" type="submit">Submit</button>
+                                    </div>
+                        }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--************************************
+            Contact Us End
+    *************************************-->
+</main>
+<!--************************************
+        Main End
+*************************************-->
+

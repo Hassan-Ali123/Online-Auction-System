@@ -1,0 +1,137 @@
+﻿@model  Sokuuhotu.Models.ApplicationUser
+
+
+<style>
+
+#btn{
+     width: 45px;
+    height: 34px;
+    border-radius: 7px;
+    background-color: #363b4d;
+    color: white;
+}
+
+#input{
+           height: 34px;
+    margin-bottom: 0.1em;
+    width: 360px;
+    background: #ffffff;
+    
+}
+#form{
+
+    margin-bottom: -6px;
+    margin-left: 80px;
+
+}
+input[type=text] :focus{
+
+    border-color:red;
+}
+
+
+.sticky{
+     position: fixed;
+  top: 0;
+  width: 100%;
+
+}
+
+</style>
+
+
+
+    <ul class="tg-navcurrency">
+        <li>
+            <a href="@Url.Action("Index","Store")">
+                <img src="~/Images/Logo123.png" alt="Oltra" style="height:45px;width:275px;margin-top: -5px;">
+            </a>
+        </li>
+    </ul>
+
+
+    <div class="search-container tg-navcurrency hidden-sm hidden-xs" id="form">
+
+        @using (Html.BeginForm("PostSearch", "Store", FormMethod.Get))
+            {
+
+            <input  type="text" placeholder="search items.." autocomplete="off" name="search" id="input">
+            <button type="submit" id="btn"><i class="fa fa-search"></i></button>
+        }
+
+    </div>
+
+
+
+
+<a class="tg-btn hidden-sm hidden-xs" style="background:white;margin-top: 7px;margin-left: 31px;" href="@Url.Action("Create","Ad")">
+    <i class="icon-pen" style="color:#363b4d"></i>
+    <span style="color:#363b4d">Post and Ad</span>
+</a>
+
+
+    @**************** Here is dropdown bar for Log in register etc*******************@
+
+
+
+    <div class="dropdown tg-themedropdown tg-userdropdown" style="margin-top: 10px;">
+        <a href="javascript:void(0);" id="tg-adminnav" class="tg-btndropdown" data-toggle="dropdown">
+            @*@if (Model.ProfileImageUrl == null)
+                {*@
+            <span class="tg-userdp"><img src="~/Images/images.png" alt="Profile image" style="height:40px;"></span>
+
+            @*}*@
+
+
+
+
+            <span class="tg-name"></span>
+            @if (Model != null)
+            {
+                <span class="tg-role">@Model.Name</span>
+
+            }
+            else
+            {
+                <span class="tg-role"></span>
+
+            }
+        </a>
+        <ul style="background: #EAE7DC;" class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-adminnav">
+           
+            
+            @if (User.Identity.IsAuthenticated == true)
+            {
+                <li>
+                    <a href="@Url.Action("Dashboard","Seller")">
+                        <i class="icon-chart-bars"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+            }
+
+
+            @*<li  class="menu-item-has-children">
+                    <a href="javascript:void(0);">
+                        <i class="icon-layers"></i>
+                        <span>My Posts</span>
+                    </a>
+                    <ul style="background: #EAE7DC;">
+                        <li><a href="@Url.Action("PostedProduct","Ad")">All Posts</a></li>
+                        <li><a href="@Url.Action("ActivePosts","Ad")">Active Ads</a></li>
+                        <li><a href="@Url.Action("ExpiredPosts", "Ad")">Expired Ads</a></li>
+                    </ul>
+                </li>*@
+
+
+
+
+
+            @* -------- MVC default Register Page(styling chnage-------------- *@
+
+            @Html.Partial("_LoginPartial")
+
+        </ul>
+    </div>
+

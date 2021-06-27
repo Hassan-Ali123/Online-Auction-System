@@ -1,0 +1,163 @@
+﻿@model BAW.ViewModels.BidsByProduct
+
+@{
+    ViewBag.Title = "Tarjoukset ";
+    Layout = "~/Views/Shared/_BuyerSellerLayout.cshtml";
+}
+
+
+
+
+
+<!--************************************
+             Dashboard Banner Start
+     *************************************-->
+<div class="tg-dashboardbanner">
+   
+
+    <div style="border-radius: 5px;background-color: rgb(237, 25, 62);height: 42px;margin-top:20px;">
+
+        <p style="color:white;text-align: center;display:block;padding-top: 7px;font-size: 24px;font-family: sans-serif;">
+            Highest Offer : 
+            <span style="background:white;color: #ed193e;border-radius: 3px;padding-left: 6px;">
+            @Model.MaxBid
+            </span>
+            <span style="margin-left:4px">Rs.</span> 
+        </p> 
+
+
+
+    </div>
+
+</div>
+<!--************************************
+        Dashboard Banner End
+*************************************-->
+<!--************************************
+                Main Start
+        *************************************-->
+<main id="tg-main" class="tg-main tg-haslayout">
+    <!--************************************
+            Section Start
+    *************************************-->
+    <section class="tg-dbsectionspace tg-haslayout">
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="tg-dashboardbox" style="    margin-top: 1%;">
+                    <div class="tg-dashboardboxtitle">
+                        <h2>Bidder's Offer </h2>
+                    </div>
+                    <div class="tg-dashboardholder">
+
+                        <table id="tg-adstype" class="table tg-dashboardtable tg-tablemyads">
+                            <thead>
+                                <tr>
+
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th style="text-transform:none">First Bid</th>
+                                    <th style="text-transform:none">Second Bid</th>
+                                    <th>Bid Date</th>
+                                    <th style="text-transform:none">Select This Bidder</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+
+
+
+                                @foreach (var item in Model.BidsOfProduct)
+                                {
+
+                                    <tr data-category="active">
+
+                                        <td data-title="Käyttäjätunnus">
+                                            <h3>
+                                                
+                                                @item.User.Name
+                                            </h3>
+                                            </td>
+                                        <td data-title="Sähköposti">
+                                            <h3 style="text-transform:none">@item.User.Email</h3>
+
+                                        </td>
+                                        <td data-title="Ensimmäinen tarjous"><h3>  @item.FirstPrice </h3></td>
+                                        <td data-title="Toinen tarjous"><h3> @item.SecondPrice  </h3></td>
+                                        <td data-title="Tarjouspäivä"><span class="tg-adstatus tg-adstatusactive">@item.BidDate.ToString(string.Format("dd.MM.yyyy"))</span></td>
+
+
+                        <!--Here is two check-->
+                         
+                                        <!--First When Product end date reaches the able to accept offer-->
+                                        <!--Second if accepted then mark tick-->
+
+
+                                        <td data-title="Vahvista voittaja">
+
+                                          @if (item.Product.AuctionEnd == true)
+                                          {
+
+
+                                              if (item.Accepted != true)
+                                              {
+
+
+                                                <div class="tg-btnsactions">
+                                                    <a class="tg-btnaction tg-btnactionview" href="@Url.Action("AcceptBidOffer", "Bid", new { bidId = item.BidRequestId })"><i class="fa fa-handshake-o"></i><small></small> </a>
+                                                </div>
+
+                                              }
+
+                                              else
+                                              {
+
+
+                                                <div class="tg-btnsactions">
+                                                    <i class="fa fa-check"></i><small>Select</small>
+                                                </div>
+                                              }
+                                          }
+                                          else
+                                          {
+                                            <div class="tg-btnsactions">
+                                                <i class="fa fa-hand-stop-o"></i><small>Wait until the auction time ends </small>
+                                            </div>
+                                          }
+
+
+
+
+                                        </td>
+
+
+                                    </tr>
+                                }
+
+
+
+
+                            </tbody>
+
+
+
+
+
+
+
+                        </table>
+                      
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!--************************************
+            Section End
+    *************************************-->
+</main>
+<!--************************************
+        Main End
+*************************************-->

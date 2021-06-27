@@ -1,0 +1,140 @@
+﻿@model IEnumerable<BAW.Models.Product>
+@{
+    ViewBag.Title = "Ads";
+    Layout = "~/Views/Shared/_BAWLayout.cshtml";
+}
+
+
+
+
+
+
+
+<main id="tg-main" class="tg-main tg-haslayout" style="background:#fff;min-height:425px">
+
+    <div class="container">
+        <div class="row">
+            <div id="tg-twocolumns" class="tg-twocolumns">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="tg-pagehead">
+                        <h1>
+                            Search results
+                        </h1>
+                        <h3>@Model.Count()  </h3>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="tg-content" class="tg-content">
+                        
+
+                        <div class="tg-ads">
+                            <div class="row">
+
+                                @foreach (var item in Model)
+                                    {
+
+                                    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+
+
+                                        <div class="tg-ad tg-verifiedad" style="width: 100%;border: 1px solid #eae7dc;">
+
+
+                                            <a href="@Url.Action("ProductDetails","Store",new {Id = item.ProductId })">
+
+                                                <div class="text-center" style="position: relative;overflow: hidden;height: 140px;">
+
+                                                    <img class="adimage" src="@Url.Content(item.MainImageUrl)" />
+                                                </div>
+                                            </a>
+
+                                            <div class="tg-adcontent">
+                                                <div class="tg-productcagegories">
+                                                    <a href="@Url.Action("ProductDetails","Store",new {Id = item.ProductId })"><h4 style="text-align: center;"> @item.ProductName</h4></a>
+                                                </div>
+
+                                                <!--category-->
+                                                <div class="tg-adtitle">
+                                                    <a href="@Url.Action("ProductsByCategory","Store",new {categoryId = item.CategoryId })"> @item.Category.CategoryName</a>
+                                                </div>
+
+
+                                                <address><b>@item.City</b></address>
+
+
+                                                <br />
+
+                                                <span>
+                                                    <i class="fa fa-clock-o"></i>
+
+                                                    <b class="getcountdown" style="color: #ed193e;padding-left: 7px;"></b>
+
+                                                    <!--  this will not show but using in js count down function -->
+                                                    <b class="enddate" style="padding-left: 7px; display:none">@item.EndDate </b>
+                                                </span>
+
+                                            </div>
+
+
+                                        </div>
+
+
+                                    </div>
+
+                                    }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </main>
+    @section scripts{
+
+        <script src="~/Scripts/jquery.countdown.js"></script>
+
+        <script>
+
+
+            $(document).ready(function () {
+
+
+                $('.tg-ad').each(function () {
+                    var thisdiv = $(this);
+
+
+                    //var date = new Date(thisdiv.find('.enddate').html());
+
+
+                    //date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+                    thisdiv.find('.getcountdown').countdown(thisdiv.find('.enddate').html(), function (event) {
+
+
+                        $(this).text(
+                           event.strftime('%-D days %!D %H:%M:%S')
+                         );
+                    }
+
+
+
+                )
+
+
+
+                });
+
+
+            });
+
+
+
+
+
+        </script>
+
+
+
+    }
+

@@ -1,0 +1,184 @@
+﻿@model BAW.ViewModels.CategoryProductVM
+@{
+    ViewBag.Title = "HelppoHuuto";
+    Layout = "~/Views/Shared/_BAWLayout.cshtml";
+
+}
+
+<!------------------------------------
+              Home Slider Start
+      -------------------------------------->
+<div id="tg-homebanner" class="tg-homebanner tg-haslayout">
+    <figure class="item" data-vide-bg="poster: ~/Images/slider/" data-vide-options="position: 50% 50%">
+        <figcaption>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="tg-bannercontent">
+                           
+                           @using (Html.BeginForm("Index", "Store", FormMethod.Post, new { @class = "tg-formtheme tg-formbannersearch" , style= "margin-left:-80px;" }))
+                           {
+                               @Html.AntiForgeryToken()
+                                 <fieldset style="background:#fff">
+                                    <div class="form-group tg-inputwithicon">
+                                        <i class="icon-bullhorn" style="color:#363b4d"></i>
+                                       @* @Html.TextBox("keywords", new { @class="form-control", placeholder="What are you looking for" })*@
+                                        <input autocomplete="off" type="text" name="keywords" class="form-control", style="background:#fff;color: #363b4d;" placeholder="item..">
+                                    
+                                    </div>
+                                    
+                                     @*<div class="form-group tg-inputwithicon">
+                                         <i class="icon-location" style="color:#363b4d"></i>
+                                         <div class="tg-select">
+                                        
+                                             @Html.DropDownList("areas",null, "Location", new { style = "background:#fff;color:#363b4d;" } )
+                                           
+                         </div>
+                                     </div>*@
+                                    <div class="form-group tg-inputwithicon">
+                                        <i class="icon-layers" style="color:#363b4d"></i>
+                                        <div class="tg-select">
+                                            @Html.DropDownList("CategoryId", (IEnumerable<SelectListItem>)ViewBag.Categorylist, "Select Category", new { @class = "form-control", id = "category", style = "background:#fff;color:#363b4d;"
+                                       })
+                                        </div>
+                                    </div>
+                                    <button class="tg-btn" style="background:#363b4d" type="submit">Search</button>
+                                </fieldset>
+                           }
+ </div>
+                    </div>
+                </div>
+            </div>
+        </figcaption>
+    </figure>
+</div>
+<!--------------------------------------
+        Home Slider End
+-------------------------------------->
+<!--************************************
+        Main Start
+*************************************-->
+<main id="tg-main" class="tg-main tg-haslayout">
+    
+    @* show in medium sereen *@
+    <section class="tg-haslayout hidden-xs hidden-sm">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-push-1 col-lg-10">
+                    <div class="tg-categoriessearch" style="height: 250px">                        <div style="margin: 14px 5px 0 5px;">
+                            <div class="row">
+   @foreach (var item in Model.Categories)
+   {
+    <div class="col-md-3" style="padding-bottom:4px;">
+        <a href="@Url.Action("ProductsByCategory", new { CategoryId = item.CategoryId })">
+            <h5 style="background-color:#d8c3a596; padding: 5px;border-radius: 5px;color: #363b4d; text-align:center;font-family:helvetica;font-weight: bold;">@item.CategoryName </h5>
+        </a>
+    </div>
+   }
+                </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--************************************
+            Categories Search End
+    *************************************-->
+
+    <!--************************************
+            Featured Ads Start
+    *************************************-->
+    <section class="tg-sectionspace tg-haslayout">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="tg-sectionhead">
+                        <div class="tg-title">
+                            <h2 style="font-size: 30px;">Ads</h2>
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class="tg-ads">
+@foreach (var item in Model.Products)
+{
+                    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            <div class="tg-ad tg-verifiedad" style="width: 100%;">
+                                <a href="@Url.Action("ProductDetails","Store",new {Id = item.ProductId })">
+                                    <div class="text-center" style="position: relative;overflow: hidden;height: 140px;">
+                                        <img class="adimage" src="@Url.Content(item.MainImageUrl)" />
+                                    </div>
+                                </a>
+                                <div class="tg-adcontent">
+                                    <div class="tg-productcagegories">
+                                       <a href="@Url.Action("ProductDetails","Store",new {Id = item.ProductId })"><h4 style="text-align: center;"> @item.ProductName</h4></a>
+                                 </div>
+                                    <!--category-->
+                                    <div class="tg-adtitle">
+                                        <a href="@Url.Action("ProductsByCategory","Store",new {categoryId = item.CategoryId })"> @item.Category.CategoryName</a>
+                                    </div>
+                                    <address><b>@item.City</b></address>
+                                    <br />
+                                    <span >
+                                        <i class="fa fa-clock-o"></i>
+                                        <b class="getcountdown" style="color: #ed193e;padding-left: 7px;"></b>
+
+                                        <!--  this will not show but using in js count down function --> 
+                                       <b class="enddate" style="padding-left: 7px; display:none">@item.EndDate </b>
+                                    </span>
+                                </div>
+                            </div>
+                    </div>
+
+}
+      
+                </div>
+
+            </div>
+        </div>
+    </section>
+         <!--************************************
+                Featured Ads End
+        *************************************-->
+
+            <!--************************************
+                How it Works Start
+        *************************************-->
+        <section class="tg-sectionspace tg-haslayout" style="margin-bottom:0px">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                        <div class="text-center">
+                            <img src="~/Images/HHImage.jpg" alt="Working Of HelppoHuuto" />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--************************************
+                How it Works  End
+        *************************************-->
+</main>
+<!--************************************
+        Main End
+*************************************-->
+@section scripts{
+<script src="~/Scripts/jquery.countdown.min.js"></script>
+ <script>
+
+
+     $(document).ready(function () {
+        // Counter in each Ad
+         $('.tg-ad').each(function () {
+             var thisdiv = $(this);
+             thisdiv.find('.getcountdown').countdown(thisdiv.find('.enddate').html(), function (event) {
+                 $(this).text(
+                    event.strftime('%-D days %H:%M:%S')
+                  );})
+         });
+     });        
+</script>
+}

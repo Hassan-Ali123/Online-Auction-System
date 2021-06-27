@@ -1,0 +1,325 @@
+﻿@model Sokuuhotu.Models.ApplicationUser
+
+
+
+
+<!--************************************
+        Main Start
+*************************************-->
+<main id="tg-main" class="tg-main tg-haslayout">
+
+    <!--************************************
+            Statistics Start
+    *************************************-->
+    <section class="tg-dbsectionspace tg-haslayout tg-statistics">
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+               Notifications (As a Seller)
+            </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+                    <div class="tg-dashboardbox tg-statistic">
+                        <div class="tg-contentbox">
+                            <h2 style="color:#ed193e">@Model.Products.Count()</h2>
+                            <h3>Total Ads</h3>
+                            <a class="tg-btnviewdetail fa fa-angle-right" href="@Url.Action("PostedProduct","Ad")">View</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+                    <div class="tg-dashboardbox tg-statistic">
+                        <div class="tg-contentbox">
+                            <h2 style="color:#ed193e">@Model.Products.Where(p => p.AuctionEnd == true).Count()</h2>
+                            <h3>Non-Active Ads</h3>
+                            <a class="tg-btnviewdetail fa fa-angle-right" href="@Url.Action("ItemsInAuction","Ad",new { status = true })">view</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+                    <div class="tg-dashboardbox tg-statistic">
+                        <div class="tg-contentbox">
+                            <h2 style="color:#ed193e">@Model.Products.Where(p => p.AuctionEnd == false).Count()</h2>
+                            <h3>Active Ads</h3>
+                            <a class="tg-btnviewdetail fa fa-angle-right" href="@Url.Action("ItemsInAuction","Ad",new { status = false })">view</a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                @Html.Action("Offers", "Bid")
+
+                @* New *@
+                @*<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+                <div class="tg-dashboardbox tg-statistic">
+                    <figure><img src="~/Images/icons/img-35.png" alt="image description"></figure>
+                    <div class="tg-contentbox">
+                        <h2>View</h2>
+                        <h3>Comments on Ads</h3>
+                        <a class="tg-btnviewdetail fa fa-angle-right" href="@Url.Action("Comments","Ad")">View Detail</a>
+                    </div>
+                </div>
+            </div>*@
+            </div>
+</section>
+    <!--************************************
+            Statistics End
+    *************************************-->
+    <!--************************************
+            Section Start
+    *************************************-->
+    <section class="tg-dbsectionspace tg-haslayout">
+        <div class="row">
+           
+
+
+
+            <!--************************************
+            Total Views Start
+    *************************************-->
+            @*<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 tg-lgcolwidthhalf">*@
+               
+            @*</div>*@
+            <!--************************************
+            Total Views End
+    *************************************-->
+
+
+            <!--************************************
+                    Approved Ads Start
+            *************************************-->
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 tg-lgcolwidthhalf">
+                <div class="tg-dashboardbox" style="margin-top: 0;">
+                  
+                    <div class="tg-dashboardholder tg-approvedads">
+                       
+                      
+                        
+
+                        <div class="row">
+
+                            <!--Profile Form-->
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="tg-dashboardboxtitle">
+                                    <h2 style="font-weight: bolder;">Personal Info</h2>
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+
+                                    <div class="tg-dashboardbox" style="margin-top: 36px;">
+                                        @*<div class="tg-dashboardboxtitle">
+                                            <h2 style="float: left;font-weight: bolder;">Omat tiedot</h2>
+                                        </div>*@
+
+@using (Html.BeginForm("UpdateProfile", "Manage",FormMethod.Post))
+{
+
+
+                                        <div class="tg-dashboardholder">
+
+
+
+                                            <div class="form-group">
+
+                                                @Html.TextBoxFor(m=>m.Name, new {@class="form-control", placeholder="Username", value=Model.Name , disabled="true" })
+                                            
+                                            </div>
+
+                                            <div class="form-group">
+                                                
+                                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "email*", value = Model.Email })
+
+                                                
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "fisrt name*", value = Model.FirstName })
+                                               
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "last name*", value = Model.LastName })
+
+                                               
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", placeholder = "mobile", value = Model.Mobile })
+                                               @* <input type="text" name="phonenumber" class="form-control" placeholder="Phone Number*">*@
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(m => m.AboutMe, new { @class = "form-control", placeholder = "something about you", value = Model.AboutMe })
+                                            </div>
+                                            
+
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(m => m.YourWebAddress, new { @class = "form-control", placeholder = "your web address", value = Model.YourWebAddress })
+                                            </div>
+
+                                            <input  class="btn btn-md" style="float:right; color:#fff;background:#4e5363;" type="submit" value="Save" />
+
+                                        </div>
+
+
+}
+
+                                    
+                                     </div>
+                             
+                            
+                               </div>
+
+
+
+
+                          
+
+
+
+
+                            <!--Profile Pic-->
+
+                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+
+
+
+
+                                <div class="tg-dashboardbox" style="margin-top:66px">
+                                    @*<div class="tg-dashboardboxtitle" style="background: #eae7dc;">
+                                        <h2 style="text-align:center;float: none;">@Model.Name</h2>
+
+                                    </div>*@
+                                    <div class="tg-dashboardholder tg-totalviews" style="background:#eae7dc;min-height:453px">
+                                        <div id="tg-viewchart" class="tg-viewchart">
+
+
+
+                                            @if (Model.ProfileImageUrl == null)
+                                            {
+                                                <div class="text-center" style="margin-top: -25px;">
+                                                    <img class="fancybox rounded" style="max-width: 200px;margin-top: 30px;"  src="~/Images/profileicon.jpg"  alt="Profile Image" />
+                                                    
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="text-center"style="margin-top: -25px;">
+                                                    
+                                                      
+                                                    <img class="fancybox rounded" style="max-width: 200px;margin-top: 30px;"  src="@Url.Content(Model.ProfileImageUrl)"  alt="Profile Image">
+                                                    @*<p style="margin:0;color: WHITE;border-radius: 5px;font-size: 22px;font-family: SANS-SERIF;background: #363b4d;margin-top: 2px;">
+                                                        @Model.Name
+                                                    </p>
+                                                    <p style="margin:0;font-family: SANS-SERIF">@Model.Email</p>
+                                                    <p style="margin:0;font-family: SANS-SERIF">@Model.Mobile</p>*@
+
+                                                </div>
+                                            }
+
+
+                                            <div style="margin-top: 6px;text-align: center;">
+                                                <span>
+                                                    Change profile picture
+                                                </span>
+                                                <input id="Profilebtn" class="btn btn-sm" style="color:#fff;background:#4e5363;"  type="button" value="Change" /> 
+                                            </div>
+
+
+
+                                            <div id="profilelink" style="background: #fff;border-radius: 5px;margin-top: 15px;height: auto;">
+                                                <P style="text-align: center;font-size: 15px;font-family: sans-serif;">
+                                                    Address your store page, which you can tell your clients or acquaintances, for example:
+
+
+                                                    <a href="@Url.Action("ViewProfile","Seller", new {u = Model.Name,area="" })">
+                                                        <span style="color:#ed193e;text-align: center;display: block;" translate="no">localhost:60265/Kauppa/@Model.Name</span>
+                                                    </a>
+                                                </P>
+                                            </div>
+
+
+
+                                            @using (Html.BeginForm("UpdateProfile", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                            {
+                                            <!--Div Image Hide by default-->
+                                                <div id="Imagediv" style="margin:0px auto; width: 280px;">
+                                                    <label class="tg-fileuploadlabel" for="tg-photogallery" style="padding:0; background: #eae7dc;">
+
+                                                        <input class="btn btn-block" type="file" name="Image" />
+                                                        <input class="btn btn-sm" style="color:#fff;background:#4e5363;" type="submit" value="Save" />
+
+                                                        @*<button class="tg-btn" type="submit" id="save">Save</button>*@
+                                                    </label>
+                                                </div>
+                                            }
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+
+
+
+                        </div>
+
+
+                 
+
+
+
+
+
+
+
+
+
+
+
+
+                        
+               
+                    </div>
+                </div>
+            </div>
+            <!--************************************
+                    Approved Ads End
+            *************************************-->
+          </div>
+
+
+            @*<div class="row">
+
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 tg-lgcolwidthhalf">
+                    <div class="tg-dashboardbox" style="margin-top:5px">
+                        <div class="tg-dashboardboxtitle">
+                      
+                               <input type="text"  style="width: 365px;"  value="helppohuuto.fi/Kauppa/@Model.Name" id="link" disabled>
+                          
+                              
+
+                        </div>
+                       
+
+                    </div>
+
+            </div>
+
+
+        </div>*@
+    </section>
+    <!--************************************
+            Section End
+    *************************************-->
+   
+</main>
+<!--************************************
+        Main End
+*************************************-->

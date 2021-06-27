@@ -1,0 +1,65 @@
+﻿@model BAW.ViewModels.CategoriesVM
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="tg-dashboardbox">
+        <div class="tg-dashboardboxtitle">
+            <h2>Categories</h2>
+
+        </div>
+        <div class="tg-dashboardholder">
+
+            <table id="tg-adstype" class="table tg-dashboardtable tg-tablemyads">
+                <thead>
+                    <tr>
+                        <th></th>
+                      
+                        <th>Category</th>
+
+                        <th>Action <small> Delete</small> </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+
+
+                    @foreach (var item in Model.AllCategories)
+                    {
+
+                        <tr data-category="active">
+
+                            <td></td>
+                          
+                            <td data-title="Category"><span class="tg-adcategories">@item.CategoryName</span></td>
+                            
+                     <td data-title="Action">
+                                <div class="tg-btnsactions">
+                                    <a class="tg-btnaction tg-btnactiondelete" href="@Url.Action("Delete","Category", new { id = item.CategoryId , onclick = "return confirm('Do you really want to delete the tag " + item.CategoryName + "?')" })">
+                                    <i class="fa fa-trash"></i>
+                                    
+                                    </a>
+                                </div>
+                            </td>
+
+
+
+                        </tr>
+                    }
+
+
+
+
+
+
+
+
+                </tbody>
+
+
+
+
+            </table>
+      
+        </div>
+    </div>
+</div>

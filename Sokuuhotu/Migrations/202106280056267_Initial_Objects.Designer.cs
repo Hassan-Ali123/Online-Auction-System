@@ -7,13 +7,13 @@ namespace Sokuuhotu.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class TablesAdded : IMigrationMetadata
+    public sealed partial class Initial_Objects : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(TablesAdded));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial_Objects));
         
         string IMigrationMetadata.Id
         {
-            get { return "201806121332168_Tables Added"; }
+            get { return "202106280056267_Initial_Objects"; }
         }
         
         string IMigrationMetadata.Source

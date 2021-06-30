@@ -14,7 +14,7 @@ namespace Sokuuhotu.Controllers
     public class PaymentController : Controller
     {
         private ApplicationDbContext _dbContext = new ApplicationDbContext();
-        private const string _key = "your-key";
+        private string _key;
         private const string _secret = "your-secret-string";
 
         [HttpGet]
@@ -38,7 +38,7 @@ namespace Sokuuhotu.Controllers
             OrderModel order = new OrderModel()
             {
                 OrderAmount = registration.Amount,
-                Currency = "INR",
+                Currency = "PKR",
                 Payment_Capture = 1,    // 0 - Manual capture, 1 - Auto capture
                 Notes = new Dictionary<string, string>()
                 {
@@ -48,6 +48,7 @@ namespace Sokuuhotu.Controllers
             };
             // var orderId = CreateOrder(order);
             var orderId = CreateTransfersViaOrder(order);
+            //_key = ViewBag.Key;
 
             PaymentReceival razorPayOptions = new PaymentReceival()
             {

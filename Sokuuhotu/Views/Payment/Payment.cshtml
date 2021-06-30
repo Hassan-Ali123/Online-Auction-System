@@ -7,12 +7,12 @@
 <h2>Payment Receival</h2>
 
 <form asp-action="AfterPayment">
-    <input type="hidden" name="orderid" id="orderid" />
-    <input type="hidden" name="paymentid" id="paymentid" />
-    <input type="hidden" name="signature" id="signature" />
-    <input type="hidden" name="paymentstatus" id="paymentstatus" />
-    <input type="submit" id="btnAfterPayment" hidden />
-    <h2 style="text-align: center">Congrats @Model.ProfileName! your payment is received!</h2>
+    <label name="orderid" id="orderid">@Model.OrderId</label>
+    @*<label name="paymentid" id="paymentid">@Model.</label>*@
+    @*<label name="signature" id="signature" ></label>*@
+    @*<label name="paymentstatus" id="paymentstatus">@Model.P</label>*@
+    @*<input type="submit" id="btnAfterPayment" />*@
+    <h4 style="text-align: center">Congrats @Model.ProfileName! your payment of @Model.AmountInSubUnits is received!</h4>
 </form>
 <button id="rzp-button1" hidden>Pay</button>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>

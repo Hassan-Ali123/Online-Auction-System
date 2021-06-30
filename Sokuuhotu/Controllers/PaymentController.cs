@@ -13,15 +13,26 @@ namespace Sokuuhotu.Controllers
 {
     public class PaymentController : Controller
     {
+        private ApplicationDbContext _dbContext = new ApplicationDbContext();
         private const string _key = "your-key";
         private const string _secret = "your-secret-string";
 
+        [HttpGet]
         public ViewResult Registration()
         {
-            var model = new RegistrationModel() { Amount = 2 };
-            return View(model);
+            RegistrationModel register = new RegistrationModel();
+            try
+            {
+                
+                _dbContext.Registrations.Add(register);
+                _dbContext.SaveChanges();
+                return View(register);
+            }
+            catch (Exception e) {  }
+            return View(register);
         }
 
+        [HttpPost]
         public ViewResult Payment(RegistrationModel registration)
         {
             OrderModel order = new OrderModel()
@@ -38,13 +49,13 @@ namespace Sokuuhotu.Controllers
             // var orderId = CreateOrder(order);
             var orderId = CreateTransfersViaOrder(order);
 
-            RazorPayOptionsModel razorPayOptions = new RazorPayOptionsModel()
+            PaymentReceival razorPayOptions = new PaymentReceival()
             {
                 Key = _key,
                 AmountInSubUnits = order.OrderAmountInSubUnits,
                 Currency = order.Currency,
-                Name = "Skynet",
-                Description = "for Dotnet",
+                Name = "",
+                Description = "",
                 ImageLogUrl = "",
                 OrderId = orderId,
                 ProfileName = registration.Name,
@@ -55,6 +66,13 @@ namespace Sokuuhotu.Controllers
                     { "note 1", "this is a payment note" }, { "note 2", "here also, you can add max 15 notes" }
                 }
             };
+            try
+            {
+                _dbContext.Payments.Add(razorPayOptions);
+                _dbContext.SaveChanges();
+                return View(razorPayOptions);
+            }
+            catch (Exception ex) { }
             return View(razorPayOptions);
         }
 

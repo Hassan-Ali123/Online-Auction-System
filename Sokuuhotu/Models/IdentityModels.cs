@@ -24,7 +24,7 @@ namespace Sokuuhotu.Models
 
         public string LastName { get; set; }
 
-
+        [Display]
         public string ProfileImageUrl { get; set; }
 
         public string Mobile { get; set; }
@@ -77,6 +77,9 @@ namespace Sokuuhotu.Models
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Contact> ContactUs { get; set; }
         public DbSet<ReportAd> ReportAd { get; set; }
+        public DbSet<PaymentReceival> Payments { get; set; }
+        public DbSet<RegistrationModel> Registrations { get; set; }
+
 
 
 

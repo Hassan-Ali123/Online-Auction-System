@@ -4,47 +4,47 @@
     Layout = "~/Views/Shared/_BAWLayout.cshtml";
 }
 
-<h2>Registration</h2>
+<h2>Register for Payment</h2>
 <div>
-    <form asp-action="Payment">
+    @using (Html.BeginForm("Payment", "Payment", FormMethod.Post))
+    {
         <div class="row">
-            <div class="offset-1 col-2">
-                <strong>Name</strong>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Name)
             </div>
-            <div class="col-4">
-                <input type="text" asp-for="Name" class="form-control" />
+            <div class="editor-label">
+                @Html.EditorFor(model => model.Name)
             </div>
         </div>
         <div class="row">
-            <div class="offset-1 col-2">
-                <strong>Mobile</strong>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Mobile)
             </div>
-            <div class="col-4">
-                <input type="text" asp-for="Mobile" class="form-control" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="offset-1 col-2">
-                <strong>Email</strong>
-            </div>
-            <div class="col-4">
-                <input type="text" asp-for="Email" class="form-control" />
+            <div class="editor-label">
+                @Html.EditorFor(model => model.Mobile)
             </div>
         </div>
         <div class="row">
-            <div class="offset-1 col-2">
-                <strong>Amount</strong>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Email)
             </div>
-            <div class="col-4">
-                ₹ @Model.Amount.ToString("0.00")
-                <input type="hidden" asp-for="Amount" value="@Model.Amount" />
+            <div class="editor-label">
+                @Html.EditorFor(model => model.Email)
+            </div>
+        </div>
+        <div class="row">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Amount)
+            </div>
+            <div class="editor-label">
+                @Html.EditorFor(model => model.Amount)
             </div>
         </div>
         <div class="row">
             <div class="col-12 text-right">
-                <button type="submit" class="btn btn-outline-primary">Register</button>
+                <button type="submit" class="btn btn-success">Register</button>
             </div>
         </div>
-    </form>
+    }
 </div>
 

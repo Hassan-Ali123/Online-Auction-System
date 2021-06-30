@@ -1,10 +1,10 @@
-﻿@model Sokuuhotu.Models.RazorPayOptionsModel
+﻿@model Sokuuhotu.Models.PaymentReceival
 @{
     ViewBag.Title = "Payment";
     Layout = "~/Views/Shared/_BAWLayout.cshtml";
 }
 
-<h2>Payment</h2>
+<h2>Payment Receival</h2>
 
 <form asp-action="AfterPayment">
     <input type="hidden" name="orderid" id="orderid" />
@@ -12,6 +12,7 @@
     <input type="hidden" name="signature" id="signature" />
     <input type="hidden" name="paymentstatus" id="paymentstatus" />
     <input type="submit" id="btnAfterPayment" hidden />
+    <h2 style="text-align: center">Congrats @Model.ProfileName! your payment is received!</h2>
 </form>
 <button id="rzp-button1" hidden>Pay</button>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
